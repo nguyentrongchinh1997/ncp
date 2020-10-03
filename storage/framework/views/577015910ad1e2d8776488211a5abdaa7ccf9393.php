@@ -1,0 +1,1 @@
+<?php /**PATH E:\Wamp\www\resources\views/regishosting/danhsach.blade.php ENDPATH**/ ?>
