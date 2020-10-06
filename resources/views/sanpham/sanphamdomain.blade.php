@@ -23,15 +23,52 @@
 
 <div class="container w-100 h-100">
 	<div class="row w-100 h-100 searchdomain">
+		<form class="form-inline md-form mb-4 border border-secondary rounded" method="get" action="{{url()->current()}}">
+			<h3 class="text-dark text-center w-100 font-weight-bold rounded">Tìm kiếm tên miền</h3>
+	  		<input class="form-control mr-sm-2 mr mb-1" name="query" type="text" placeholder="Tìm kiếm" aria-label="Search">
+	  		<button class="btn btn-success btn-rounded btn-sm my-0 mb-1" type="submit">Tìm kiếm</button>
+		</form>
+	</div>
+	{{-- <div class="row w-100 h-100 searchdomain">
 		<form class="form-inline md-form mb-4 border border-secondary rounded" method="post" action="https://domain.z.com/vn/domains/result/">
 			<h3 class="text-dark text-center w-100 font-weight-bold rounded">Tìm kiếm tên miền</h3>
 	  		<input class="form-control mr-sm-2 mr mb-1" type="text" placeholder="Tìm kiếm" aria-label="Search">
 	  		<button class="btn btn-success btn-rounded btn-sm my-0 mb-1" type="submit">Tìm kiếm</button>
 		</form>
-	</div>
+	</div> --}}
 
 	<div class="row w-100 h-100">
-		<h3 class="text-dark text-center w-100 font-weight-bold rounded"><hr />Bảng giá tên miền</h3>
+		@if(session('error'))
+			<div class="col-lg-12 alert alert-danger">
+				{{session('error')}}
+			</div>
+		@endif
+		@if(!empty($query))
+			@foreach(config('config.domain') as $key => $domain)
+				<div class="col-lg-6">
+					{{$query}}.{{$key}}
+				</div>
+				<div class="col-lg-6">
+					<form action="{{route('buy-domain-form')}}">
+						<input type="hidden" name="price" value="{{$domain}}">
+						<input type="hidden" name="domain" value="{{$query}}.{{$key}}">
+						<table>
+							<tr>
+								<td style="width: 100px">
+									<span>
+										{{number_format($domain)}}
+									</span>
+								</td>
+								<td>
+									<button>Chọn mua</button>
+								</td>
+							</tr>
+						</table>
+					</form>
+				</div>
+			@endforeach
+		@endif
+		{{-- <h3 class="text-dark text-center w-100 font-weight-bold rounded"><hr />Bảng giá tên miền</h3>
 		<ul class="nav nav-pills mb-3 w-100" id="pills-tab" role="tablist" style="display: flex;align-items: center;justify-content: center;">
 		  	<li class="nav-item tab">
 		    	<a class="nav-link active design" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Tên miền phổ thông <i class="fa fa-caret-down" aria-hidden="true"></i></a>
@@ -464,7 +501,7 @@
 				  	</tbody>
 				</table>
 		  	</div>
-		</div>
+		</div> --}}
 
 	</div>
 </div>

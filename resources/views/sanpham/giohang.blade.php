@@ -58,7 +58,14 @@
 							<td>
 								{{($value->status == 0 ? 'Chờ xử lý' : 'Đã được duyệt')}}
 							</td>
-							<td>{{ $value->created_at }}</td>
+							<td>
+								{{date('d/m/Y', strtotime($value->created_at))}} - 
+								@if($value->type == 0)
+									{{date('d/m/Y', strtotime('+1 years', strtotime($value->created_at)))}}
+								@else
+									{{date('d/m/Y', strtotime("+$value->time month", strtotime($value->created_at)))}}
+								@endif
+							</td>
 							@if($user->level == 0)
 								<td class="text-center"><a href="{{ url('/sanpham/giohang/sua/' . $value->id) }}"><i class="fal fa-edit"></i></a></td>
 								<td class="text-center"><a href="{{ url('/sanpham/giohang/xoa/' . $value->id) }}"><i class="fal fa-trash-alt text-danger"></i></a></td>

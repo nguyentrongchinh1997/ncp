@@ -22,7 +22,8 @@
 
 				<div class="form-group">
 					<label for="noidung">Nội dung bài viết</label>
-					<textarea type="text" class="form-control @error('noidung') is-invalid @enderror" id="noidung" name="noidung" rows="10" cols="50"></textarea>
+					
+					<textarea type="text" class="ckeditor form-control @error('noidung') is-invalid @enderror" id="noidung" name="noidung" rows="10" cols="50"></textarea>
 					@error('noidung')
 						<span class="invalid-feedback" role="alert">{{ $message }}</span>
 					@enderror

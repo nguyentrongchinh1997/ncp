@@ -19,20 +19,55 @@ class RegisHostingController extends Controller
 	// 	return view('/sanpham/regishosting');
 	// }
 
+	public function buyDomainForm(Request $request)
+	{
+		$check = Domain::where('tendomain', $request->get('domain'))->first();
+		$domain = $request->get('domain');
+			
+		if (empty($check)) {
+			Domain::create([
+				'tendomain' => $request->get('domain'),
+				'giatien' => $request->get('price'),
+			]);
+		} else {
+			if ($check->status == 1) {
+				return redirect()->route('sanphamdomain', ['query' => $request->get('domain')])->with('error', 'Tên miền này đã được đăng ký');
+			}
+		}
+		return view('sanpham.buy_domain', compact('domain'));
+	}
+
+	public function buyDomain(Request $request)
+	{
+		if (!auth()->check()) {
+			return redirect('/login');
+		} else {
+			RegisHosting::create([
+				'nguoidung_id' => auth()->user()->id,
+				'loaihosting' => $request->domain,
+				'type' => 0,
+				'time' => 12
+			]);
+
+			return redirect()->route('cart');
+		}
+	}
+
 	public function revenue(Request $request)
 	{
-		$date = NULL;
+		$date_start = $date_end = NULL; 
 
-		if (empty($request->date)) {
+		if (empty($request->date_start)) {
 			$revenues = KhachHang::all();
 			$total = KhachHang::sum('price');
 		} else {
-			$date = $request->date;
-			$revenues = KhachHang::whereDate('created_at', $date)->get();
-			$total = KhachHang::whereDate('created_at', $date)->sum('price');
+			$date_start = date("$request->date_start 00:00:00");
+			$date_end = date("$request->date_end 23:59:59");
+			$revenues = KhachHang::whereBetween('created_at', [$date_start, $date_end])->get();
+			$total = KhachHang::whereBetween('created_at', [$date_start, $date_end])->sum('price');
 		}
 		
-		return view('revenue', compact('revenues', 'total', 'date'));
+		return view('revenue', compact('revenues', 'total', 'date_start', 'date_end'));
 	}
 
 	public function accept($id)
@@ -43,8 +78,13 @@ class RegisHostingController extends Controller
 			$cart->status = 1; $cart->save();
 			$date_register = date('Y-m-d', strtotime($cart->created_at));
 			$t = strtotime($date_register);
-			$date_exprie = date('Y-m-d', strtotime('+1 years', $t));
 
+			if ($cart->type == 0) {
+				$date_exprie = date('Y-m-d', strtotime('+1 years', $t));
+			} else {
+				$date_exprie = date('Y-m-d', strtotime("+$cart->time month", $t));
+			}
+ 
 			if ($cart->type == 0) {
 				$domain = Domain::where('status', 0)->get()->random(1);
 				Domain::where('id', $domain[0]->id)->update(['status' => 1]);
@@ -90,7 +130,7 @@ class RegisHostingController extends Controller
 		$user = auth()->user();
 
 		if ($user->level == 1) {
-			$regishosting = RegisHosting::all();
+			$regishosting = RegisHosting::latest()->get();
 		} else {
 			$regishosting = RegisHosting::where('nguoidung_id', auth()->user()->id)->latest()->get();
 		}
@@ -98,10 +138,12 @@ class RegisHostingController extends Controller
 		return view('/sanpham/giohang', compact('regishosting', 'user'));
 	}
 
-	public function getThem()
+	public function getThem(Request $request)
 	{
+		$option = (!empty($request->option)) ? $request->option : NULL;
 		$regishosting = RegisHosting::all();
-		return view('sanpham/regishosting');
+
+		return view('sanpham/regishosting', compact('option'));
 	}
 	
 	// Xử lý thêm
@@ -120,6 +162,8 @@ class RegisHostingController extends Controller
 		$rh = new RegisHosting();
 		$rh->loaihosting = $request->loaihosting;
 		$rh->nguoidung_id = auth()->user()->id;
+		$rh->type = 1;
+		$rh->time = $request->time;
 		$rh->created_at = Carbon::now();
 		$rh->save();
 

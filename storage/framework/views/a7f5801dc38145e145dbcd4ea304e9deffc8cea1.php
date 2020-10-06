@@ -60,7 +60,16 @@
 								<?php echo e(($value->status == 0 ? 'Chờ xử lý' : 'Đã được duyệt')); ?>
 
 							</td>
-							<td><?php echo e($value->created_at); ?></td>
+							<td>
+								<?php echo e(date('d/m/Y', strtotime($value->created_at))); ?> - 
+								<?php if($value->type == 0): ?>
+									<?php echo e(date('d/m/Y', strtotime('+1 years', strtotime($value->created_at)))); ?>
+
+								<?php else: ?>
+									<?php echo e(date('d/m/Y', strtotime("+$value->time month", strtotime($value->created_at)))); ?>
+
+								<?php endif; ?>
+							</td>
 							<?php if($user->level == 0): ?>
 								<td class="text-center"><a href="<?php echo e(url('/sanpham/giohang/sua/' . $value->id)); ?>"><i class="fal fa-edit"></i></a></td>
 								<td class="text-center"><a href="<?php echo e(url('/sanpham/giohang/xoa/' . $value->id)); ?>"><i class="fal fa-trash-alt text-danger"></i></a></td>

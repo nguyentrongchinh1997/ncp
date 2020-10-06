@@ -13,6 +13,8 @@
 						<th>STT</th>
 						<th>Khách hàng</th>
 						<th>Domain (Host)</th>
+						<th>Ngày đăng ký</th>
+						<th>Ngày hết hạn</th>
 						<th>Sửa</th>
 						<th>Xóa</th>
 					</tr>
@@ -40,7 +42,14 @@
 									<?php echo e($value->Domain->tendomain); ?>
 
 								<?php endif; ?>
-								
+							</td>
+							<td>
+								<?php echo e(date('d/m/Y', strtotime($value->date_register))); ?>
+
+							</td>
+							<td>
+								<?php echo e(date('d/m/Y', strtotime($value->date_exprie))); ?>
+
 							</td>
 							<td class="text-center"><a href="<?php echo e(url('/khachhang/sua/' . $value->id)); ?>"><i class="fal fa-edit"></i></a></td>
 							<td class="text-center"><a href="<?php echo e(url('/khachhang/xoa/' . $value->id)); ?>"><i class="fal fa-trash-alt text-danger"></i></a></td>

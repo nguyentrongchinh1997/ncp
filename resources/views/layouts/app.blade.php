@@ -26,6 +26,10 @@
 	<link href="{{ asset('/css/bootstrap.min.css') }}" rel="stylesheet" />
 	<link href="{{ asset('/css/fontawesome.min.css') }}" rel="stylesheet" />
 	<link href="{{ asset('/css/custom.css') }}" rel="stylesheet" />
+	<script src="{{ asset('ckeditor_full/ckeditor.js') }}"></script>
+	<script>
+		CKEDITOR.replace('noidung', {height: 500});
+	</script>
 
 	<style>
 		tr:hover {
@@ -42,7 +46,7 @@
 	<div class="container-fluid">
 		<nav class="navbar navbar-expand-sm bg-dark navbar-dark ">
 			<a class="navbar-brand" href="{{ url('/') }}">
-				<img src="{{ asset('public/images/logo.png') }}" width="30" height="30" class="d-inline-block align-top" alt="" />
+				<img src="{{ asset('images/logo.png') }}" width="30" height="30" class="d-inline-block align-top" alt="" />
 				{{ config('app.name', 'Laravel') }}
 			</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">

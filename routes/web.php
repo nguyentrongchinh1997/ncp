@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\Route;
 // bật, tắt đăng kí và đổi mật khẩu
 Auth::routes(['register' => true, 'reset' => true]);
 
+Route::get('buy/domain', 'RegisHostingController@buyDomainForm')->name('buy-domain-form');
+Route::post('buy/domain', 'RegisHostingController@buyDomain')->name('buy-domain');
 // Welcome
 Route::get('/contact', [
     'uses' => 'ContactUsFormController@createForm'

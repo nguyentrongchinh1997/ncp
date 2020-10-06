@@ -96,12 +96,12 @@
                     <div class="col-md-8 p-0 m-0 w-100">
                         <div class="card">
                             <div class="card-header text-center">
-                                <form action="<?php echo e(asset('/sanpham/regishosting')); ?>">
                                 <h2>Start</h2>
                                 <p class="price text-danger"><a class="font-weight-bold h3">75.000</a>VND/tháng</p>
                                 <p class="price text-danger"><del>100.000<a class="price-vnd">VND/tháng</a></del></p>
-                                <button type="submit" class="btn btn-danger">Đăng ký ngay <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
-                                </form>
+                                <a href="<?php echo e(asset('/sanpham/regishosting')); ?>?option=75">
+                                    <button type="submit" class="btn btn-danger">Đăng ký ngay <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                                </a>
                             </div>
                             <div class="card-footer">
                                
@@ -124,12 +124,12 @@
                     <div class="col-md-8 p-0 m-0 w-100">
                         <div class="card">
                             <div class="card-header text-center">
-                                <form action="<?php echo e(asset('/sanpham/regishosting')); ?>">
                                 <h2>Professional</h2>
                                 <p class="price text-danger"><a class="font-weight-bold h3">175.000</a>VND/tháng</p>
                                 <p class="price text-danger"><del>250.000<a class="price-vnd">VND/tháng</a></del></p>
-                                <button type="submit" class="btn btn-danger">Đăng ký ngay <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
-                                </form>
+                                <a href="<?php echo e(asset('/sanpham/regishosting')); ?>?option=175">
+                                    <button type="submit" class="btn btn-danger">Đăng ký ngay <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                                </a>
                             </div>
                             <div class="card-footer">
                                
@@ -150,12 +150,12 @@
                     <div class="col-md-8 p-0 m-0 w-100">
                         <div class="card">
                             <div class="card-header text-center">
-                                <form action="<?php echo e(asset('/sanpham/regishosting')); ?>">
-                                <h2>Enterprise</h2>
-                                <p class="price text-danger"><a class="font-weight-bold h3">350.000</a>VND/tháng</p>
-                                <p class="price text-danger"><del>500.000<a class="price-vnd">VND/tháng</a></del></p>
-                                <button type="submit" class="btn btn-danger">Đăng ký ngay <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
-                                </form>
+                                    <h2>Enterprise</h2>
+                                    <p class="price text-danger"><a class="font-weight-bold h3">350.000</a>VND/tháng</p>
+                                    <p class="price text-danger"><del>500.000<a class="price-vnd">VND/tháng</a></del></p>
+                                    <a href="<?php echo e(asset('/sanpham/regishosting')); ?>?option=350">
+                                        <button type="submit" class="btn btn-danger">Đăng ký ngay <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                                    </a>
                             </div>
                             <div class="card-footer">
                                

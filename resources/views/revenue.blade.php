@@ -5,7 +5,16 @@
         <div class="card-header text-center"><h2>Doanh thu</h2></div>
         <div class="card-header text-center">
         <form action="{{url()->current()}}" method="GET">
-            <input value="{{$date}}" type="date" name="date" class="form-control">
+            <div class="row">
+                <div class="col-lg-6">
+                    <label for="">Từ</label>
+                    <input value="@if(!empty($date_start)){{date('Y-m-d', strtotime($date_start))}}@endif" type="date" name="date_start" class="form-control">
+                </div>
+                <div class="col-lg-6">
+                    <label for="">Đến</label>
+                    <input value="@if(!empty($date_end)){{date('Y-m-d', strtotime($date_end))}}@endif" type="date" name="date_end" class="form-control">
+                </div>
+            </div>
             <br>
             <button class="btn btn-primary" type="submit">
                 LỌC

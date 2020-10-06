@@ -26,6 +26,10 @@
 	<link href="<?php echo e(asset('/css/bootstrap.min.css')); ?>" rel="stylesheet" />
 	<link href="<?php echo e(asset('/css/fontawesome.min.css')); ?>" rel="stylesheet" />
 	<link href="<?php echo e(asset('/css/custom.css')); ?>" rel="stylesheet" />
+	<script src="<?php echo e(asset('ckeditor_full/ckeditor.js')); ?>"></script>
+	<script>
+		CKEDITOR.replace('noidung', {height: 500});
+	</script>
 
 	<style>
 		tr:hover {
@@ -42,7 +46,7 @@
 	<div class="container-fluid">
 		<nav class="navbar navbar-expand-sm bg-dark navbar-dark ">
 			<a class="navbar-brand" href="<?php echo e(url('/')); ?>">
-				<img src="<?php echo e(asset('public/images/logo.png')); ?>" width="30" height="30" class="d-inline-block align-top" alt="" />
+				<img src="<?php echo e(asset('images/logo.png')); ?>" width="30" height="30" class="d-inline-block align-top" alt="" />
 				<?php echo e(config('app.name', 'Laravel')); ?>
 
 			</a>

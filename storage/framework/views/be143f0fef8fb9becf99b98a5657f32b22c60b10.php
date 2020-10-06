@@ -39,9 +39,21 @@ if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>" id="loaihosting" name="loaihosting">
 						<option>-- Chọn loại hosting --</option>
-						<option>Start - 75.000VND</option>
-						<option>Professional - 175.000VND</option>
-						<option>Enterprise - 350.000VND</option>
+						<option <?php if($option == 75): ?><?php echo e('selected'); ?><?php endif; ?>>Start - 75.000VND</option>
+						<option <?php if($option == 175): ?><?php echo e('selected'); ?><?php endif; ?>>Professional - 175.000VND</option>
+						<option <?php if($option == 350): ?><?php echo e('selected'); ?><?php endif; ?>>Enterprise - 350.000VND</option>
+					</select>
+				</div>
+
+				<div class="form-group">
+					<label for="">Số tháng</label>
+					<select name="time" id="" class="form-control">
+						<option value="6">6 tháng</option>
+						<option value="12">12 tháng</option>
+						<option value="18">18 tháng</option>
+						<option value="24">24 tháng</option>
+						<option value="30">30 tháng</option>
+						<option value="36">36 tháng</option>
 					</select>
 				</div>
 				
