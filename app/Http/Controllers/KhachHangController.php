@@ -21,7 +21,8 @@ class KhachHangController extends Controller
 	// Danh sách
 	public function getDanhSach()
 	{
-		$khachhang = KhachHang::all();
+		$khachhang = KhachHang::all()->groupBy('nguoidung_id');
+
 		return view('khachhang.danhsach', compact('khachhang'));
 	}
 	

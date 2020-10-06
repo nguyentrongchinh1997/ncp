@@ -12,47 +12,60 @@
 					<tr>
 						<th>STT</th>
 						<th>Khách hàng</th>
-						<th>Domain (Host)</th>
-						<th>Ngày đăng ký</th>
-						<th>Ngày hết hạn</th>
-						<th>Sửa</th>
-						<th>Xóa</th>
+						<th>Sản phẩm</th>
+						
 					</tr>
 				</thead>
 				<tbody>
-					<?php $__currentLoopData = $khachhang; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+					<?php $__currentLoopData = $khachhang; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 						<tr>
 							<td><?php echo e($loop->iteration); ?></td>
 							<td>
-								<p>
-									Tên: <b><?php echo e($value->nguoiDung->name); ?></b>
-								</p>
-								<p>
-									Email: <b><?php echo e($value->nguoiDung->email); ?></b>
-								</p>
-								<p>
-									SĐT: <b><?php echo e($value->nguoiDung->phone); ?></b>
-								</p>
+								<?php echo e(\App\Helpers\helper::getUser($key)->name); ?>
+
+								
 							</td>
 							<td>
-								<?php if($value->hosting_id != ''): ?>
-									<?php echo e($value->Hosting->diachiip); ?>
+								<table style="width: 100%">
+									<tr>
+										<th>
+											Host (Domain)
+										</th>
+										<th>
+											Ngày đăng ký
+										</th>
+										<th>Ngày hết hạn</th>
+									</tr>
+									<?php $__currentLoopData = $value; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+										
+											<tr>
+												<?php if($item->hosting_id != ''): ?>
+													<td>
+														<?php echo e($item->Hosting->diachiip); ?>
 
-								<?php else: ?>
-									<?php echo e($value->Domain->tendomain); ?>
+													</td>
+													
+												<?php else: ?>
+													<td>
+														<?php echo e($item->Domain->tendomain); ?>
 
-								<?php endif; ?>
+													</td>
+												<?php endif; ?>
+												<td>
+													<?php echo e(date('d/m/Y', strtotime($item->date_register))); ?>
+
+												</td>
+												<td>
+													<?php echo e(date('d/m/Y', strtotime($item->date_exprie))); ?>
+
+												</td>
+											</tr>
+										
+									<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+								</table>
 							</td>
-							<td>
-								<?php echo e(date('d/m/Y', strtotime($value->date_register))); ?>
-
-							</td>
-							<td>
-								<?php echo e(date('d/m/Y', strtotime($value->date_exprie))); ?>
-
-							</td>
-							<td class="text-center"><a href="<?php echo e(url('/khachhang/sua/' . $value->id)); ?>"><i class="fal fa-edit"></i></a></td>
-							<td class="text-center"><a href="<?php echo e(url('/khachhang/xoa/' . $value->id)); ?>"><i class="fal fa-trash-alt text-danger"></i></a></td>
+							
+							
 						</tr>
 					<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 				</tbody>

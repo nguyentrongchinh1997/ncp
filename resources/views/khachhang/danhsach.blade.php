@@ -14,19 +14,18 @@
 					<tr>
 						<th>STT</th>
 						<th>Khách hàng</th>
-						<th>Domain (Host)</th>
-						<th>Ngày đăng ký</th>
-						<th>Ngày hết hạn</th>
-						<th>Sửa</th>
-						<th>Xóa</th>
+						<th>Sản phẩm</th>
+						{{-- <th>Sửa</th>
+						<th>Xóa</th> --}}
 					</tr>
 				</thead>
 				<tbody>
-					@foreach($khachhang as $value)
+					@foreach($khachhang as $key => $value)
 						<tr>
 							<td>{{ $loop->iteration }}</td>
 							<td>
-								<p>
+								{{\App\Helpers\helper::getUser($key)->name}}
+								{{-- <p>
 									Tên: <b>{{$value->nguoiDung->name}}</b>
 								</p>
 								<p>
@@ -34,23 +33,59 @@
 								</p>
 								<p>
 									SĐT: <b>{{$value->nguoiDung->phone}}</b>
-								</p>
+								</p> --}}
 							</td>
 							<td>
-								@if($value->hosting_id != '')
-									{{$value->Hosting->diachiip}}
-								@else
-									{{$value->Domain->tendomain}}
-								@endif
+								<table style="width: 100%">
+									<tr>
+										<th>
+											Host (Domain)
+										</th>
+										<th>
+											Ngày đăng ký
+										</th>
+										<th>Ngày hết hạn</th>
+									</tr>
+									@foreach($value as $item)
+										
+											<tr>
+												@if($item->hosting_id != '')
+													<td>
+														{{$item->Hosting->diachiip}}
+													</td>
+													
+												@else
+													<td>
+														{{$item->Domain->tendomain}}
+													</td>
+												@endif
+												<td>
+													{{date('d/m/Y', strtotime($item->date_register))}}
+												</td>
+												<td>
+													{{date('d/m/Y', strtotime($item->date_exprie))}}
+												</td>
+											</tr>
+										
+									@endforeach
+								</table>
+							</td>
+							{{-- <td>
+								@foreach($value as $item)
+									<p>
+										{{date('d/m/Y', strtotime($item->date_register))}}
+									</p>
+								@endforeach
 							</td>
 							<td>
-								{{date('d/m/Y', strtotime($value->date_register))}}
-							</td>
-							<td>
-								{{date('d/m/Y', strtotime($value->date_exprie))}}
-							</td>
-							<td class="text-center"><a href="{{ url('/khachhang/sua/' . $value->id) }}"><i class="fal fa-edit"></i></a></td>
-							<td class="text-center"><a href="{{ url('/khachhang/xoa/' . $value->id) }}"><i class="fal fa-trash-alt text-danger"></i></a></td>
+								@foreach($value as $item)
+									<p>
+										{{date('d/m/Y', strtotime($item->date_exprie))}}
+									</p>
+								@endforeach
+							</td> --}}
+							{{-- <td class="text-center"><a href="{{ url('/khachhang/sua/' . $value->id) }}"><i class="fal fa-edit"></i></a></td>
+							<td class="text-center"><a href="{{ url('/khachhang/xoa/' . $value->id) }}"><i class="fal fa-trash-alt text-danger"></i></a></td> --}}
 						</tr>
 					@endforeach
 				</tbody>

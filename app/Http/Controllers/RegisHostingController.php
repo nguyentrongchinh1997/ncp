@@ -109,7 +109,7 @@ class RegisHostingController extends Controller
 					],
 					[
 						'hosting_id' => $host[0]->id,
-						'price' => $host[0]->giatien,
+						'price' => $host[0]->giatien * $cart->time,
 						'nguoidung_id' => $cart->nguoidung_id,
 						'date_register' => $date_register,
 						'date_exprie' => $date_exprie
