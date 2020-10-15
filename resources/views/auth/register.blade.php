@@ -35,6 +35,13 @@
 							@enderror
 						</div>
 						<div class="form-group">
+							<label for="phone">Số điện thoại</label>
+							<input type="text" class="form-control @error('phone') is-invalid @enderror" id="phone" name="phone" value="{{ old('phone') }}" required />
+							@error('phone')
+								<span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
+							@enderror
+						</div>
+						<div class="form-group">
 							<label for="password">Mật khẩu</label>
 							<input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password" required />
 							@error('password')

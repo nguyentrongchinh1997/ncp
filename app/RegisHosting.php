@@ -9,7 +9,7 @@ class RegisHosting extends Model
 	protected $table = 'regishosting';
 	protected $keyType = 'string';
 	protected $fillable = [
-		'nguoidung_id', 'loaihosting', 'type', 'status', 'time',
+		'nguoidung_id', 'loaihosting', 'type', 'status', 'time', 'price'
 	];
 
 	public function nguoiDung()

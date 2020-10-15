@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRegishostingTable extends Migration
+class CreateCartsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,13 @@ class CreateRegishostingTable extends Migration
      */
     public function up()
     {
-        Schema::create('regishosting', function (Blueprint $table) {
+        Schema::create('carts', function (Blueprint $table) {
             $table->id();
             $table->integer('nguoidung_id');
-            $table->string('loaihosting');
-            $table->integer('type')->comment('0=domain; 1=host');
-            $table->float('price', 20, 2);
-            $table->integer('time');
-            $table->integer('status')->default(0)->comment('0=chưa duyệt; 1=duyệt');
+            $table->string('product');
+            $table->integer('type')->comment('0=domain, 1=host');
+            $table->float('price', 20, 2)->comment('gia');
+            $table->integer('time')->comment('thời gian sử dụng');
             $table->timestamps();
         });
     }
@@ -32,6 +31,6 @@ class CreateRegishostingTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('regishosting');
+        Schema::dropIfExists('carts');
     }
 }

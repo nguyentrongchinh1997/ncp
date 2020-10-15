@@ -86,15 +86,18 @@ class RegisHostingController extends Controller
 			}
  
 			if ($cart->type == 0) {
-				$domain = Domain::where('status', 0)->get()->random(1);
-				Domain::where('id', $domain[0]->id)->update(['status' => 1]);
+				$domain = Domain::create([
+					'tendomain' => $cart->loaihosting,
+					'giatien' => $cart->price,
+					'status' => 1
+				]);
 				KhachHang::updateOrCreate(
 					[
 						'cart_id' => $id
 					],
 					[
-						'domain_id' => $domain[0]->id,
-						'price' => $domain[0]->giatien,
+						'domain_id' => $domain->id,
+						'price' => $cart->price,
 						'nguoidung_id' => $cart->nguoidung_id,
 						'date_register' => $date_register,
 						'date_exprie' => $date_exprie
@@ -109,7 +112,7 @@ class RegisHostingController extends Controller
 					],
 					[
 						'hosting_id' => $host[0]->id,
-						'price' => $host[0]->giatien * $cart->time,
+						'price' => $cart->price,
 						'nguoidung_id' => $cart->nguoidung_id,
 						'date_register' => $date_register,
 						'date_exprie' => $date_exprie
@@ -144,29 +147,5 @@ class RegisHostingController extends Controller
 		$regishosting = RegisHosting::all();
 
 		return view('sanpham/regishosting', compact('option'));
-	}
-	
-	// Xử lý thêm
-	public function postThem(Request $request)
-	{
-		$request->validate([
-			'loaihosting' => 'required|max:50',
-			'dienthoai' => 'required|max:50',
-		]);
-
-		if (!auth()->check()) {
-			return redirect('/register');
-		}
-		NguoiDung::where('id', auth()->user()->id)->update(['phone' => $request->dienthoai]);
-		
-		$rh = new RegisHosting();
-		$rh->loaihosting = $request->loaihosting;
-		$rh->nguoidung_id = auth()->user()->id;
-		$rh->type = 1;
-		$rh->time = $request->time;
-		$rh->created_at = Carbon::now();
-		$rh->save();
-
-		return redirect()->route('cart');
 	}
 }

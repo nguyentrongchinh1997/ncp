@@ -14,9 +14,8 @@
 					<tr>
 						<th>STT</th>
 						<th>Khách hàng</th>
-						<th>Sản phẩm</th>
-						{{-- <th>Sửa</th>
-						<th>Xóa</th> --}}
+						<th>Domain</th>
+						<th>Host</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -24,30 +23,20 @@
 						<tr>
 							<td>{{ $loop->iteration }}</td>
 							<td>
-								{{\App\Helpers\helper::getUser($key)->name}}
-								{{-- <p>
-									Tên: <b>{{$value->nguoiDung->name}}</b>
+								<p>
+									{{\App\Helpers\helper::getUser($key)->name}}
 								</p>
 								<p>
-									Email: <b>{{$value->nguoiDung->email}}</b>
+									{{\App\Helpers\helper::getUser($key)->phone}}
 								</p>
 								<p>
-									SĐT: <b>{{$value->nguoiDung->phone}}</b>
-								</p> --}}
+									{{\App\Helpers\helper::getUser($key)->email}}
+								</p>
 							</td>
 							<td>
 								<table style="width: 100%">
-									<tr>
-										<th>
-											Host (Domain)
-										</th>
-										<th>
-											Ngày đăng ký
-										</th>
-										<th>Ngày hết hạn</th>
-									</tr>
 									@foreach($value as $item)
-										
+										@if($item->domain_id != '')
 											<tr>
 												@if($item->hosting_id != '')
 													<td>
@@ -60,13 +49,38 @@
 													</td>
 												@endif
 												<td>
-													{{date('d/m/Y', strtotime($item->date_register))}}
-												</td>
-												<td>
-													{{date('d/m/Y', strtotime($item->date_exprie))}}
+													Thời hạn: từ
+													<b>{{date('d/m/Y', strtotime($item->date_register))}}</b>
+													đến <b>{{date('d/m/Y', strtotime($item->date_exprie))}}</b>
 												</td>
 											</tr>
-										
+										@endif
+									@endforeach
+								</table>
+							</td>
+							<td>
+								<table style="width: 100%">
+									@foreach($value as $item)
+										@if($item->hosting_id != '')
+											<tr>
+												@if($item->hosting_id != '')
+													<td>
+														{{$item->Hosting->diachiip}}
+													</td>
+													
+												@else
+													<td>
+														{{$item->Domain->tendomain}}
+													</td>
+												@endif
+												<td>
+													Thời hạn: từ
+													<b>{{date('d/m/Y', strtotime($item->date_register))}}</b>
+													đến <b>{{date('d/m/Y', strtotime($item->date_exprie))}}</b>
+												</td>
+												
+											</tr>
+										@endif
 									@endforeach
 								</table>
 							</td>

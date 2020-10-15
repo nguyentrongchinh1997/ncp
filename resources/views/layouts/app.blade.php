@@ -10,7 +10,8 @@
 	<title>{{ config('app.name', 'Laravel') }}</title>
 	
 	<!-- Scripts -->
-	<script src="{{ asset('/js/jquery-3.5.1.slim.min.js') }}" defer></script>
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+	{{-- <script src="{{ asset('/js/jquery-3.5.1.slim.min.js') }}" defer></script> --}}
 	<script src="{{ asset('/js/popper.min.js') }}" defer></script>
 	<script src="{{ asset('/js/bootstrap.min.js') }}" defer></script>
 	@yield('javascript')
@@ -30,6 +31,7 @@
 	<script>
 		CKEDITOR.replace('noidung', {height: 500});
 	</script>
+	<script src="https://truyen88.net/js/admin/sweetalert2@9.js"></script>
 
 	<style>
 		tr:hover {
@@ -71,6 +73,9 @@
 							<li class="nav-item"><a class="nav-link" href="{{ route('register') }}"><i class="fal fa-user-plus"></i> Đăng ký</a></li>
 						@endif
 					@else
+						<li>
+						<a href="{{route('cart.list')}}">Giỏ hàng</a>
+						</li>
 						<li class="nav-item dropdown">
 							<a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre><i class="fal fa-user-circle"></i> {{ Auth::user()->name }} <span class="caret"></span></a>
 							<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">

@@ -15,6 +15,13 @@ use Illuminate\Support\Facades\Route;
 // bật, tắt đăng kí và đổi mật khẩu
 Auth::routes(['register' => true, 'reset' => true]);
 
+Route::group(['prefix' => 'cart', 'as' => 'cart.'], function(){
+    Route::post('add', 'CartController@add')->name('add');
+    Route::get('list', 'CartController@list')->name('list');
+    Route::get('delete/{id}', 'CartController@delete')->name('delete');
+    Route::get('send', 'CartController@send')->name('send');
+});
+
 Route::get('buy/domain', 'RegisHostingController@buyDomainForm')->name('buy-domain-form');
 Route::post('buy/domain', 'RegisHostingController@buyDomain')->name('buy-domain');
 // Welcome
@@ -55,7 +62,7 @@ Route::get('/sanpham/giohang/', 'RegisHostingController@getDanhSach')->name('car
 Route::get('/sanpham/duyetdon/{id}', 'RegisHostingController@accept')->name('accept-cart');
 
 Route::get('/sanpham/regishosting', 'RegisHostingController@getThem');
-Route::post('/sanpham/regishosting', 'RegisHostingController@postThem');
+Route::post('/sanpham/regishosting', 'CartController@postThem');
 
 Route::get('/sanpham/giohang{id}', 'RegisHostingController@getSua');
 Route::post('/sanpham/giohang{id}', 'RegisHostingController@postSua');

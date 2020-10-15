@@ -12,8 +12,8 @@
 					<tr>
 						<th>STT</th>
 						<th>Khách hàng</th>
-						<th>Sản phẩm</th>
-						
+						<th>Domain</th>
+						<th>Host</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -21,23 +21,23 @@
 						<tr>
 							<td><?php echo e($loop->iteration); ?></td>
 							<td>
-								<?php echo e(\App\Helpers\helper::getUser($key)->name); ?>
+								<p>
+									<?php echo e(\App\Helpers\helper::getUser($key)->name); ?>
 
-								
+								</p>
+								<p>
+									<?php echo e(\App\Helpers\helper::getUser($key)->phone); ?>
+
+								</p>
+								<p>
+									<?php echo e(\App\Helpers\helper::getUser($key)->email); ?>
+
+								</p>
 							</td>
 							<td>
 								<table style="width: 100%">
-									<tr>
-										<th>
-											Host (Domain)
-										</th>
-										<th>
-											Ngày đăng ký
-										</th>
-										<th>Ngày hết hạn</th>
-									</tr>
 									<?php $__currentLoopData = $value; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-										
+										<?php if($item->domain_id != ''): ?>
 											<tr>
 												<?php if($item->hosting_id != ''): ?>
 													<td>
@@ -52,15 +52,40 @@
 													</td>
 												<?php endif; ?>
 												<td>
-													<?php echo e(date('d/m/Y', strtotime($item->date_register))); ?>
-
-												</td>
-												<td>
-													<?php echo e(date('d/m/Y', strtotime($item->date_exprie))); ?>
-
+													Thời hạn: từ
+													<b><?php echo e(date('d/m/Y', strtotime($item->date_register))); ?></b>
+													đến <b><?php echo e(date('d/m/Y', strtotime($item->date_exprie))); ?></b>
 												</td>
 											</tr>
-										
+										<?php endif; ?>
+									<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+								</table>
+							</td>
+							<td>
+								<table style="width: 100%">
+									<?php $__currentLoopData = $value; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+										<?php if($item->hosting_id != ''): ?>
+											<tr>
+												<?php if($item->hosting_id != ''): ?>
+													<td>
+														<?php echo e($item->Hosting->diachiip); ?>
+
+													</td>
+													
+												<?php else: ?>
+													<td>
+														<?php echo e($item->Domain->tendomain); ?>
+
+													</td>
+												<?php endif; ?>
+												<td>
+													Thời hạn: từ
+													<b><?php echo e(date('d/m/Y', strtotime($item->date_register))); ?></b>
+													đến <b><?php echo e(date('d/m/Y', strtotime($item->date_exprie))); ?></b>
+												</td>
+												
+											</tr>
+										<?php endif; ?>
 									<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 								</table>
 							</td>

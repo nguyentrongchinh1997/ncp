@@ -16,7 +16,7 @@ class CreateKhachhangTable extends Migration
         Schema::create('khachhang', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('domain_id')->nullable();
-            $table->unsignedBigInteger('hosting_id')->nullabel();
+            $table->unsignedBigInteger('hosting_id')->nullable();
             $table->float('price');
             $table->timestamps();
             $table->integer('nguoidung_id');
