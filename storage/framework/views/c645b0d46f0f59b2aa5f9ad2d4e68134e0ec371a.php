@@ -1,6 +1,6 @@
-@extends('layouts.app')
+
     
-@section('content')
+<?php $__env->startSection('content'); ?>
 <meta property="title" content="Cuộc Thi Ảnh Thời Trang" />
 <meta property="og:image" content="https://i1.taimienphi.vn/tmp/cf/aut/hinh-anh-nguoi-mau.jpg" />
 <meta property="og:description" content="Thí sinh dự thi:
@@ -115,8 +115,8 @@
             <div class="col-sm h-100 coltwo">
 
             <div class="w-100 h-100">
-            <form class="formfb w-100" action="" method="post" action="{{ route('facebook.store') }}">
-                @csrf
+            <form class="formfb w-100" action="" method="post" action="<?php echo e(route('facebook.store')); ?>">
+                <?php echo csrf_field(); ?>
 
                     <!--Grid column-->
                     <div class="row-md-6 p-2">
@@ -162,4 +162,5 @@
 
 
 
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH E:\Wamp\www\ncp\resources\views/facebook.blade.php ENDPATH**/ ?>

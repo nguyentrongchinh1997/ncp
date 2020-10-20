@@ -15,11 +15,12 @@ class CreateCartsTable extends Migration
     {
         Schema::create('carts', function (Blueprint $table) {
             $table->id();
-            $table->integer('nguoidung_id');
+            $table->unsignedBigInteger('nguoidung_id');
             $table->string('product');
             $table->integer('type')->comment('0=domain, 1=host');
             $table->float('price', 20, 2)->comment('gia');
             $table->integer('time')->comment('thời gian sử dụng');
+            $table->foreign('nguoidung_id')->references('id')->on('nguoidung');
             $table->timestamps();
         });
     }

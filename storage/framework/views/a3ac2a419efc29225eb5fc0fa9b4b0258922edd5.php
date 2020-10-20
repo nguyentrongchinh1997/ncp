@@ -1,6 +1,6 @@
-@extends('layouts.app')
 
-@section('content')
+
+<?php $__env->startSection('content'); ?>
     <style>
    
     .carousel-sub-item
@@ -101,7 +101,7 @@
                                 <h2>Start</h2>
                                 <p class="price text-danger"><a class="font-weight-bold h3">75.000</a>VND/tháng</p>
                                 <p class="price text-danger"><del>100.000<a class="price-vnd">VND/tháng</a></del></p>
-                                <a href="{{asset('/sanpham/regishosting')}}?option=75">
+                                <a href="<?php echo e(asset('/sanpham/regishosting')); ?>?option=75">
                                     <button type="submit" class="btn btn-danger">Đăng ký ngay <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
                                 </a>
                             </div>
@@ -129,7 +129,7 @@
                                 <h2>Professional</h2>
                                 <p class="price text-danger"><a class="font-weight-bold h3">175.000</a>VND/tháng</p>
                                 <p class="price text-danger"><del>250.000<a class="price-vnd">VND/tháng</a></del></p>
-                                <a href="{{asset('/sanpham/regishosting')}}?option=175">
+                                <a href="<?php echo e(asset('/sanpham/regishosting')); ?>?option=175">
                                     <button type="submit" class="btn btn-danger">Đăng ký ngay <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
                                 </a>
                             </div>
@@ -155,7 +155,7 @@
                                     <h2>Enterprise</h2>
                                     <p class="price text-danger"><a class="font-weight-bold h3">350.000</a>VND/tháng</p>
                                     <p class="price text-danger"><del>500.000<a class="price-vnd">VND/tháng</a></del></p>
-                                    <a href="{{asset('/sanpham/regishosting')}}?option=350">
+                                    <a href="<?php echo e(asset('/sanpham/regishosting')); ?>?option=350">
                                         <button type="submit" class="btn btn-danger">Đăng ký ngay <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
                                     </a>
                             </div>
@@ -177,4 +177,5 @@
                 </div>
         </div>
     </div>
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH E:\Wamp\www\ncp\resources\views//sanpham/sanphamhosting.blade.php ENDPATH**/ ?>

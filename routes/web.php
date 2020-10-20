@@ -27,7 +27,7 @@ Route::post('buy/domain', 'RegisHostingController@buyDomain')->name('buy-domain'
 // Welcome
 Route::get('/contact', [
     'uses' => 'ContactUsFormController@createForm'
-]);
+])->name('contact');
 
 Route::post('/contact', [
     'uses' => 'ContactUsFormController@ContactUsForm',
@@ -36,7 +36,7 @@ Route::post('/contact', [
 
 Route::get('/facebook', [
     'uses' => 'FacebookFormController@createForm'
-]);
+])->name('facebook');
 
 Route::post('/facebook', [
     'uses' => 'FacebookFormController@FacebookForm',
@@ -124,7 +124,7 @@ Route::get('/hosting/xoa/{id}', 'HostingController@getXoa');
 Route::post('/hosting/xoa/{id}', 'HostingController@postXoa');
 
 //Bai viet
-Route::get('/baiviet', 'BaiVietController@getDanhSach');
+Route::get('/baiviet', 'BaiVietController@getDanhSach')->name("baiviet");
 
 Route::get('/baiviet/them', 'BaiVietController@getThem');
 Route::post('/baiviet/them', 'BaiVietController@postThem');
@@ -134,3 +134,15 @@ Route::post('/baiviet/sua/{id}', 'BaiVietController@postSua');
 
 Route::get('/baiviet/xoa/{id}', 'BaiVietController@getXoa');
 Route::post('/baiviet/xoa/{id}', 'BaiVietController@postXoa');
+
+//Nguoi Dung (tai khoan)
+Route::get('/nguoidung', 'DSNguoiDungController@getDanhSach')->name("nguoidung");
+
+Route::get('/nguoidung/them', 'DSNguoiDungController@getThem');
+Route::post('/nguoidung/them', 'DSNguoiDungController@postThem');
+
+Route::get('/nguoidung/sua/{id}', 'DSNguoiDungController@getSua');
+Route::post('/nguoidung/sua/{id}', 'DSNguoiDungController@postSua');
+
+Route::get('/nguoidung/xoa/{id}', 'DSNguoiDungController@getXoa');
+Route::post('/nguoidung/xoa/{id}', 'DSNguoiDungController@postXoa');

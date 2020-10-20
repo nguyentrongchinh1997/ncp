@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="<?php echo e(str_replace('_', '-', app()->getLocale())); ?>">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,7 +8,7 @@
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-        <link href="{{ asset('public/images/logo.png') }}" rel="shortcut icon" type="image/x-icon" />
+        <link href="<?php echo e(asset('public/images/logo.png')); ?>" rel="shortcut icon" type="image/x-icon" />
 
         <!-- Styles -->
         <style>
@@ -66,19 +66,19 @@
     </head>
     <body>
         <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
+            <?php if(Route::has('login')): ?>
                 <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Trang Quản Lý</a>
-                    @else
-                        <a href="{{ route('login') }}">Đăng Nhập</a>
+                    <?php if(auth()->guard()->check()): ?>
+                        <a href="<?php echo e(url('/home')); ?>">Trang Quản Lý</a>
+                    <?php else: ?>
+                        <a href="<?php echo e(route('login')); ?>">Đăng Nhập</a>
 
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Đăng Ký</a>
-                        @endif
-                    @endauth
+                        <?php if(Route::has('register')): ?>
+                            <a href="<?php echo e(route('register')); ?>">Đăng Ký</a>
+                        <?php endif; ?>
+                    <?php endif; ?>
                 </div>
-            @endif
+            <?php endif; ?>
 
             <div class="content">
                 <div class="title m-b-md">
@@ -86,12 +86,13 @@
                 </div>
 
                 <div class="links">
-                    <a href="{{route('sanphamdomain')}}">Mua Domain</a>
-                    <a href="{{route('sanphamhosting')}}">Mua Hosting</a>
-                    <a href="{{route('contact')}}">Liên Hệ</a>
-                    <a href="{{route('baiviet')}}">Tin Tức</a>
+                    <a href="<?php echo e(route('sanphamdomain')); ?>">Mua Domain</a>
+                    <a href="<?php echo e(route('sanphamhosting')); ?>">Mua Hosting</a>
+                    <a href="/contact">Liên Hệ</a>
+                    <a href="/baiviet">Tin Tức</a>
                 </div>
             </div>
         </div>
     </body>
 </html>
+<?php /**PATH E:\Wamp\www\New folder\ncp\resources\views/welcome.blade.php ENDPATH**/ ?>
