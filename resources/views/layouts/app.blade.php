@@ -42,6 +42,9 @@
 		    bottom: 0;
 		    width: 100%;
 		}
+		#cart-text{
+			color: #00b59c;
+		}
 	</style>
 </head>
 <body data-spy="scroll" data-target=".navbar" data-offset="50">
@@ -73,8 +76,9 @@
 							<li class="nav-item"><a class="nav-link" href="{{ route('register') }}"><i class="fal fa-user-plus"></i> Đăng ký</a></li>
 						@endif
 					@else
-						<li>
-						<a href="{{route('cart.list')}}">Giỏ hàng</a>
+						<li class="nav-item">
+							<img src="{{ asset('images/cart.svg') }}" width="60" height="30" alt="cart" />
+							<a id="cart-text" class="nav-link" href="{{route('cart.list')}}">Giỏ hàng</a>
 						</li>
 						<li class="nav-item dropdown">
 							<a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre><i class="fal fa-user-circle"></i> {{ Auth::user()->name }} <span class="caret"></span></a>

@@ -1,6 +1,15 @@
 
 
 <?php $__env->startSection('content'); ?>
+<style>
+    button#myBtn{
+        display: none!important;
+    }
+    .Tong{
+        font-size: 50px;
+        font-weight: bold;
+    }
+</style>
 <div class="card">
         <div class="card-header text-center"><h2>Doanh thu</h2></div>
         <div class="card-header text-center">
@@ -26,10 +35,9 @@
 				<thead class="bg bg-primary">
 					<tr>
 						<th>STT</th>
-						<th>
-							Khách hàng
-						</th>
+						<th>Khách hàng</th>
 						<th>Domain/Host</th>
+                        <th>Thời hạn</th>
 						<th>Thu</th>
 					</tr>
 				</thead>
@@ -60,6 +68,12 @@
 
                                 <?php endif; ?>
                             </td>
+                            <td>
+                                từ
+                                    <b><?php echo e(date('d/m/Y', strtotime($revenueItem->date_register))); ?></b>
+                                đến
+                                    <b><?php echo e(date('d/m/Y', strtotime($revenueItem->date_exprie))); ?></b>
+                            </td>
                             <td align="right">
                                 <?php echo e(number_format($revenueItem->price)); ?>
 
@@ -67,8 +81,8 @@
                         </tr>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     <tfoot>
-                        <tr>
-                            <td align="right" colspan="3">
+                        <tr class="Tong">
+                            <td align="right" colspan="4">
                                 <b>TỔNG</b>
                             </td>
                             <td align="right">
