@@ -18,6 +18,7 @@
 						<th>Host</th>
 					</tr>
 				</thead>
+				nó như thế này cơ mà, m cop thì thiêu
 				<tbody>
 					<?php $__currentLoopData = $khachhang; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 						<tr>

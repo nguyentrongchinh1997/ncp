@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="card">
-		<div class="card-header text-center"><h2>Quản lý giỏ hàng</h2></div>
+		<div class="card-header text-center"><h2>Quản lý đơn hàng</h2></div>
 		<div class="card-body">
 			@if(session('error'))
 				<div class="alert alert-danger">
@@ -56,7 +56,15 @@
 								{{($value->type == 0 ? 'Domain' : 'Hosting')}}
 							</td>
 							<td>
-								{{($value->status == 0 ? 'Chờ xử lý' : 'Đã được duyệt')}}
+								@if($value->status == 0)
+									<a>Chờ duyệt</a>
+								@endif
+								@if($value->status == 1)
+									<a>Đã thanh toán</a>
+								@endif
+								@if($value->status == 2)
+									<a class="text-danger font-weight-bold">Đã hủy</a>
+								@endif
 							</td>
 							<td>
 								{{date('d/m/Y', strtotime($value->created_at))}} - 
@@ -70,13 +78,29 @@
 								<td class="text-center"><a href="{{ url('/sanpham/giohang/sua/' . $value->id) }}"><i class="fal fa-edit"></i></a></td>
 								<td class="text-center"><a href="{{ url('/sanpham/giohang/xoa/' . $value->id) }}"><i class="fal fa-trash-alt text-danger"></i></a></td>
 							@else
+							
 								<td align="center">
+								<form action="{{route('accept-cart', ['id' => $value->id])}}" method="get">
+								
+								<select class="">
+									<option value="">-- Chọn trạng thái --</option>
+									<option value="$value->status=0">Chưa duyệt</option>
+									<option value="$value->status=1">Đã thanh toán</option>
+									<option value="$value->status=2">Hủy</option>
+								</select>
+								<button type="submit">Gửi</button>
+								</form>
+								</td>
+								{{--
+									<td align="center">
 									@if($value->status == 0)
 										<a href="{{route('accept-cart', ['id' => $value->id])}}">Duyệt đơn</a>
 									@else
 										Đã được duyệt
 									@endif
 								</td>
+									--}}
+								
 							@endif
 							
 						</tr>

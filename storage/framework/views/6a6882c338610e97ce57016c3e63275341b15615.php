@@ -85,7 +85,7 @@
 							<a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre><i class="fal fa-user-circle"></i> <?php echo e(Auth::user()->name); ?> <span class="caret"></span></a>
 							<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
 								<a class="dropdown-item" href="<?php echo e(route('nguoidung')); ?>"><i class="fal fa-sign-out"></i>Thông tin tài khoản</a>
-								<a class="dropdown-item" href=""><i class="fal fa-sign-out"></i>Đổi mật khẩu</a>
+								<a class="dropdown-item" href="<?php echo e(route('change.password')); ?>"><i class="fal fa-sign-out"></i>Đổi mật khẩu</a>
 								<a class="dropdown-item" href="<?php echo e(route('logout')); ?>" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fal fa-sign-out"></i> Đăng xuất</a>
 								<form id="logout-form" action="<?php echo e(route('logout')); ?>" method="post" style="display: none;"><?php echo csrf_field(); ?></form>
 							</div>

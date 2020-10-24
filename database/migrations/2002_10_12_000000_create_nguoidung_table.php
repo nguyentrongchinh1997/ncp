@@ -19,6 +19,7 @@ class CreateNguoiDungTable extends Migration
 			$table->string('username')->unique();
 			$table->string('phone')->nullable();
 			$table->string('email')->unique();
+			$table->string('hinhanh')->nullable();
 			$table->timestamp('email_verified_at')->nullable();
 			$table->string('password');
 			$table->integer('level')->default(0)->comment('0=kh, 1=admin');

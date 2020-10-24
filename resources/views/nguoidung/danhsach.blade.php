@@ -4,10 +4,22 @@
 	<div class="card">
 		<div class="card-header text-center"><h2>Thông tin tài khoản</h2></div>
 		<div class="card-body">
-			<p>
-				{{-- <a href="{{ url('/khachhang/them') }}" class="btn btn-primary"><i class="fal fa-plus"></i> Thêm mới</a>
-				<a href="#" class="btn btn-success" data-toggle="modal" data-target="#exampleModal" ><i class="fas fa-file-import"></i> Nhập từ Excel</a>
-				<a href="{{ url('/khachhang/xuat') }}" class="btn btn-success"><i class="fal fa-upload"></i> Xuất từ Excel</a></p> --}}
+			@csrf
+
+
+			
+			{{--
+			<form action="{{ url('/nguoidung/them/' . auth()->user()->id) }}" method="post" enctype="multipart/form-data">
+
+				<div class="card w-50">
+					
+					<input  type="file" class="form-control @error('hinhanh') is-invalid @enderror" id="hinhanh" name="hinhanh"/>
+					@error('hinhanh')
+						<span class="invalid-feedback" role="alert">{{ $message }}</span>
+					@enderror
+					<button type="submit" class="btn btn-primary"><i class="fal fa-save"></i> Thêm ảnh đại diện</button>
+				</div>
+			</form>--}}
 
 			<table class="table table-bordered table-sm">
 				<thead class="">
@@ -43,62 +55,41 @@
 						</td>
 					</tr>
 				@endforeach
-
 				{{-- Xuất domain - hosting của user --}}
-				{{--	<table style="width: 100%">
-						@foreach($khachhang as $key => $value)
-									@foreach($value as $item)
-										@if($item->domain_id != '')
-											<tr>
-												@if($item->hosting_id != '')
-													<td>
-														{{$item->Hosting->diachiip}}
-													</td>
-													
-												@else
-													<td>
-														{{$item->Domain->tendomain}}
-													</td>
-												@endif
-												<td>
-													Thời hạn: từ
-													<b>{{date('d/m/Y', strtotime($item->date_register))}}</b>
-													đến <b>{{date('d/m/Y', strtotime($item->date_exprie))}}</b>
-												</td>
-											</tr>
-										@endif
-									@endforeach
-								</table>
-							</td>
-							<td>
-								<table style="width: 100%">
-									@foreach($value as $item)
-										@if($item->hosting_id != '')
-											<tr>
-												@if($item->hosting_id != '')
-													<td>
-														{{$item->Hosting->diachiip}}
-													</td>
-													
-												@else
-													<td>
-														{{$item->Domain->tendomain}}
-													</td>
-												@endif
-												<td>
-													Thời hạn: từ
-													<b>{{date('d/m/Y', strtotime($item->date_register))}}</b>
-													đến <b>{{date('d/m/Y', strtotime($item->date_exprie))}}</b>
-												</td>
-												
-											</tr>
-										@endif
-									@endforeach
-								@endforeach
-								</table>
-								--}}
+					
 				</thead>
 				
+			</table>
+			<table class="table table-bordered table-sm">
+				<thead class="bg bg-primary">
+					<tr>
+						<th>STT</th>
+						<th>Domain</th>
+						<th>Host</th>
+						<th>Ngày đăng ký - Hết hạn</th>
+					</tr>
+				</thead>
+				<tbody>
+					@foreach($products as $productItem)
+						<tr>
+							<td>{{ $loop->iteration }}</td>
+							
+							<td>
+								@if($productItem->domain_id != '')
+									{{$productItem->Domain->tendomain}}
+								@endif
+							</td>
+							<td>
+								@if($productItem->hosting_id != '')
+									{{$productItem->Hosting->diachiip}}
+								@endif
+							</td>
+							<td>
+								{{date('d/m/Y', strtotime($productItem->date_register))}} - {{date('d/m/Y', strtotime($productItem->date_expire))}}
+							</td>
+						</tr>
+					@endforeach
+				</tbody>
 			</table>
 		</div>
 	</div>

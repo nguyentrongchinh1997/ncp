@@ -2,7 +2,7 @@
 
 <?php $__env->startSection('content'); ?>
 <div class="card">
-		<div class="card-header text-center"><h2>Quản lý giỏ hàng</h2></div>
+		<div class="card-header text-center"><h2>Quản lý đơn hàng</h2></div>
 		<div class="card-body">
 			<?php if(session('error')): ?>
 				<div class="alert alert-danger">
@@ -59,8 +59,15 @@
 
 							</td>
 							<td>
-								<?php echo e(($value->status == 0 ? 'Chờ xử lý' : 'Đã được duyệt')); ?>
-
+								<?php if($value->status == 0): ?>
+									<a>Chờ duyệt</a>
+								<?php endif; ?>
+								<?php if($value->status == 1): ?>
+									<a>Đã thanh toán</a>
+								<?php endif; ?>
+								<?php if($value->status == 2): ?>
+									<a class="text-danger font-weight-bold">Đã hủy</a>
+								<?php endif; ?>
 							</td>
 							<td>
 								<?php echo e(date('d/m/Y', strtotime($value->created_at))); ?> - 
@@ -76,13 +83,21 @@
 								<td class="text-center"><a href="<?php echo e(url('/sanpham/giohang/sua/' . $value->id)); ?>"><i class="fal fa-edit"></i></a></td>
 								<td class="text-center"><a href="<?php echo e(url('/sanpham/giohang/xoa/' . $value->id)); ?>"><i class="fal fa-trash-alt text-danger"></i></a></td>
 							<?php else: ?>
+							
 								<td align="center">
-									<?php if($value->status == 0): ?>
-										<a href="<?php echo e(route('accept-cart', ['id' => $value->id])); ?>">Duyệt đơn</a>
-									<?php else: ?>
-										Đã được duyệt
-									<?php endif; ?>
+								<form action="<?php echo e(route('accept-cart', ['id' => $value->id])); ?>" method="get">
+								
+								<select class="">
+									<option value="">-- Chọn trạng thái --</option>
+									<option value="$value->status=0">Chưa duyệt</option>
+									<option value="$value->status=1">Đã thanh toán</option>
+									<option value="$value->status=2">Hủy</option>
+								</select>
+								<button type="submit">Gửi</button>
+								</form>
 								</td>
+								
+								
 							<?php endif; ?>
 							
 						</tr>

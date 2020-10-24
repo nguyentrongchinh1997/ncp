@@ -4,8 +4,11 @@
 	<div class="card">
 		<div class="card-header text-center"><h2>Thông tin tài khoản</h2></div>
 		<div class="card-body">
-			<p>
-				
+			<?php echo csrf_field(); ?>
+
+
+			
+			
 
 			<table class="table table-bordered table-sm">
 				<thead class="">
@@ -41,11 +44,44 @@
 						</td>
 					</tr>
 				<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-
 				
-				
+					
 				</thead>
 				
+			</table>
+			<table class="table table-bordered table-sm">
+				<thead class="bg bg-primary">
+					<tr>
+						<th>STT</th>
+						<th>Domain</th>
+						<th>Host</th>
+						<th>Ngày đăng ký - Hết hạn</th>
+					</tr>
+				</thead>
+				<tbody>
+					<?php $__currentLoopData = $products; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $productItem): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+						<tr>
+							<td><?php echo e($loop->iteration); ?></td>
+							
+							<td>
+								<?php if($productItem->domain_id != ''): ?>
+									<?php echo e($productItem->Domain->tendomain); ?>
+
+								<?php endif; ?>
+							</td>
+							<td>
+								<?php if($productItem->hosting_id != ''): ?>
+									<?php echo e($productItem->Hosting->diachiip); ?>
+
+								<?php endif; ?>
+							</td>
+							<td>
+								<?php echo e(date('d/m/Y', strtotime($productItem->date_register))); ?> - <?php echo e(date('d/m/Y', strtotime($productItem->date_expire))); ?>
+
+							</td>
+						</tr>
+					<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+				</tbody>
 			</table>
 		</div>
 	</div>

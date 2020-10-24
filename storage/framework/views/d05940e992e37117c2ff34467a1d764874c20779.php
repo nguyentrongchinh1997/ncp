@@ -35,9 +35,9 @@
                             <div class="created-post">Ngày xuất bản <?php echo e($value->created_at); ?></div>
                             <div class="title-post"><h2><?php echo e($value->tieude); ?></h2></div>
                             <div class="d-flex" style="width: 500; height: 320; align-items: center; justify-content: center;">
-                                <img class="rounded" src="<?php echo e(asset('/public/upload/'.$value->hinhanh)); ?>" width="500;" height="320;">
+                                <img class="rounded" src="<?php echo e(asset('/upload/'.$value->hinhanh)); ?>" width="500;" height="320;">
                             </div>
-                            <div class="content-post"><?php echo e($value->noidung); ?></div>
+                            <div class="content-post"><?php echo $value->noidung; ?></div>
                         <?php if(auth()->guard()->check()): ?>
                             <div class="text-right">
                                 <a href="<?php echo e(url('/baiviet/sua/' . $value->id)); ?>"><i class="fal fa-edit"></i></a>

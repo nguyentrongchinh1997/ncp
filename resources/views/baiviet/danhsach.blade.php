@@ -35,9 +35,9 @@
                             <div class="created-post">Ngày xuất bản {{ $value->created_at }}</div>
                             <div class="title-post"><h2>{{ $value->tieude }}</h2></div>
                             <div class="d-flex" style="width: 500; height: 320; align-items: center; justify-content: center;">
-                                <img class="rounded" src="{{asset('/public/upload/'.$value->hinhanh)}}" width="500;" height="320;">
+                                <img class="rounded" src="{{asset('/upload/'.$value->hinhanh)}}" width="500;" height="320;">
                             </div>
-                            <div class="content-post">{{ $value->noidung }}</div>
+                            <div class="content-post">{!! $value->noidung !!}</div>
                         @auth
                             <div class="text-right">
                                 <a href="{{ url('/baiviet/sua/' . $value->id) }}"><i class="fal fa-edit"></i></a>

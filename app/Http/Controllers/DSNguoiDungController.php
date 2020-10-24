@@ -14,20 +14,42 @@ use Illuminate\Http\Request;
 
 class DSNguoiDungController extends Controller
 {
-    public function getKhachHang()
-    {
-        $userId = auth()->user()->id;
-        $khachhang = KhachHang::where('id', $userId)->latest()->get();
-
-        return view('khachhang.danhsach', compact('khachhang'));
-    }
 
     public function getDanhSach()
     {
         $userId = auth()->user()->id;
         $nguoidung = NguoiDung::where('id', $userId)->latest()->get();
+        $products = KhachHang::where('nguoidung_id', $userId)->get();
 
-        return view('nguoidung.danhsach', compact('nguoidung'));
+        return view('nguoidung.danhsach', compact('nguoidung', 'products'));
+    }
+
+    // Form thêm hình ảnh
+    public function getThemHinhAnh($id)
+    {
+        $userId = auth()->user()->id;
+        $nguoidung = NguoiDung::find($id);
+        return view('nguoidung.them', compact('nguoidung'));
+    }
+    
+    // Xử lý thêm ảnh
+    public function postThemHinhAnh(Request $request, $id)
+    {
+        $request->validate([
+            'hinhanh' => 'required',
+        ]);
+        
+        $nguoidung = NguoiDung::find($id);
+        if($request->hasFile('hinhanh')){
+
+            $fImage = $request->file('hinhanh');
+            $bientam = time().'_'.$fImage->getClientOriginalName();
+            $destinationPath = public_path('/upload');
+            $fImage->move($destinationPath,$bientam); 
+        }
+        $nguoidung->hinhanh = $bientam;
+        $nguoidung->save();
+        return redirect('/nguoidung');
     }
 
     public function getSua($id)
