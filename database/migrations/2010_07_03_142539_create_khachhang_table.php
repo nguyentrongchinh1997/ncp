@@ -19,13 +19,14 @@ class CreateKhachhangTable extends Migration
             $table->unsignedBigInteger('hosting_id')->nullable();
             $table->float('price');
             $table->timestamps();
-            $table->integer('nguoidung_id');
+            $table->unsignedBigInteger('nguoidung_id');
             $table->date('date_register');
             $table->date('date_exprie');
             $table->unsignedBigInteger('order_id');
             $table->foreign('domain_id')->references('id')->on('domain');
             $table->foreign('order_id')->references('id')->on('orders');
             $table->foreign('hosting_id')->references('id')->on('hosting');
+            $table->foreign('nguoidung_id')->references('id')->on('nguoidung');
         });
     }
 

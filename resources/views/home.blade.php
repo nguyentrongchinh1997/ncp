@@ -13,6 +13,7 @@
 				</div>
 			@endif
 			Trang web quản lý domain & hosting.
+
 		</div>
 	</div>
 @endsection

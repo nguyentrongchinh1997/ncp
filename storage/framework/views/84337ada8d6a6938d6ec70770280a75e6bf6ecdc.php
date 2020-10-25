@@ -88,8 +88,8 @@
                 <div class="links">
                     <a href="<?php echo e(route('sanphamdomain')); ?>">Mua Domain</a>
                     <a href="<?php echo e(route('sanphamhosting')); ?>">Mua Hosting</a>
-                    <a href="/contact">Liên Hệ</a>
-                    <a href="/baiviet">Tin Tức</a>
+                    <a href="<?php echo e(route('contact')); ?>">Liên Hệ</a>
+                    <a href="<?php echo e(route('baiviet')); ?>">Tin Tức</a>
                 </div>
             </div>
         </div>

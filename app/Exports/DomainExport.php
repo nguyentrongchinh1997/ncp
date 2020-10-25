@@ -11,18 +11,16 @@ class DomainExport implements FromCollection, WithHeadings
     public function headings(): array
 	{
 		return [
-			'Mã Domain',
 			'Tên Domain',
-			'Tên khách hàng',
-			'Địa chỉ ip',
-			'ngày thuê',
-			'thời hạn',
-			'giá tiền',
+			'Giá tiền',
+			'Ngày tạo',
+			'Trạng thái',
+			'Ngày sửa',
 		];
 	}
 	
 	public function collection()
 	{
-		return Domain::all('id', 'tendomain', 'tenkh', 'diachiip', 'ngaythue', 'thoihan', 'giatien');
+		return Domain::all( 'tendomain', 'giatien', 'created_at', 'status', 'updated_at');
 	}
 }

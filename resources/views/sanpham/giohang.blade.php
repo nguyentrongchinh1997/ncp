@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="card">
-		<div class="card-header text-center"><h2>Quản lý giỏ hàng</h2></div>
+		<div class="card-header text-center"><h2>Quản lý đơn hàng</h2></div>
 		<div class="card-body">
 			@if(session('error'))
 				<div class="alert alert-danger">
@@ -16,12 +16,7 @@
 						<th>Khách hàng</th>
 						<th>Sản phẩm</th>
 						<th>Trạng thái</th>
-						@if($user->level == 0)
-							<th>Sửa</th>
-							<th>Xóa</th>
-						@else
-							<th>Xác nhận</th>
-						@endif
+						<th>Xác nhận</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -98,9 +93,7 @@
 										<td></td>
 									</tr>
 								</table>
-								
-							</td>
-							
+							</td>					
 							<td>
 								@if($value->status == 0)
 									Chưa duyệt
@@ -110,13 +103,13 @@
 									Đã hủy
 								@endif
 							</td>
-							<td align="center">
-								@if($value->status == 0)
-									<a href="{{route('accept-cart', ['id' => $value->id])}}">Duyệt đơn</a>
-								@elseif($value->status == 1)
-									Đã được duyệt
+							<td>
+								@if($value->status == 0 && auth()->user()->level == 1)
+								<a href="{{route('accept-cart', ['id' => $value->id])}}">
+									Duyệt đơn
+								</a>
 								@endif
-							</td>							
+							</td>
 						</tr>
 					@endforeach
 				</tbody>

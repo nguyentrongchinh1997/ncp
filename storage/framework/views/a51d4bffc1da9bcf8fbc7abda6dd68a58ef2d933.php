@@ -1,6 +1,15 @@
 
 
 <?php $__env->startSection('content'); ?>
+<style>
+    button#myBtn{
+        display: none!important;
+    }
+    .Tong{
+        font-size: 50px;
+        font-weight: bold;
+    }
+</style>
 <div class="card">
         <div class="card-header text-center"><h2>Doanh thu</h2></div>
         <div class="card-header text-center">

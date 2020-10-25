@@ -15,12 +15,13 @@ class CreateRegishostingTable extends Migration
     {
         Schema::create('regishosting', function (Blueprint $table) {
             $table->id();
-            $table->integer('nguoidung_id');
+            $table->unsignedBigInteger('nguoidung_id');
             $table->string('loaihosting');
             $table->integer('type')->comment('0=domain; 1=host');
             $table->float('price', 20, 2);
             $table->integer('time');
-            $table->integer('status')->default(0)->comment('0=chưa duyệt; 1=duyệt');
+            $table->integer('status')->default(0)->comment('0=chưa duyệt; 1=duyệt; 2=hủy');
+            $table->foreign('nguoidung_id')->references('id')->on('nguoidung');
             $table->timestamps();
         });
     }

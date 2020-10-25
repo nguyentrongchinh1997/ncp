@@ -15,6 +15,12 @@ use Illuminate\Support\Facades\Route;
 // bật, tắt đăng kí và đổi mật khẩu
 Auth::routes(['register' => true, 'reset' => true]);
 
+// change password
+Route::get('change-password', 'ChangePasswordController@index');
+
+Route::post('change-password', 'ChangePasswordController@store')->name('change.password');
+
+//giỏ hàng
 Route::group(['prefix' => 'cart', 'as' => 'cart.'], function(){
     Route::post('add', 'CartController@add')->name('add');
     Route::get('list', 'CartController@list')->name('list');
@@ -24,19 +30,21 @@ Route::group(['prefix' => 'cart', 'as' => 'cart.'], function(){
 
 Route::get('buy/domain', 'RegisHostingController@buyDomainForm')->name('buy-domain-form');
 Route::post('buy/domain', 'RegisHostingController@buyDomain')->name('buy-domain');
-// Welcome
+
+// Liên hệ
 Route::get('/contact', [
     'uses' => 'ContactUsFormController@createForm'
-]);
+])->name('contact');
 
 Route::post('/contact', [
     'uses' => 'ContactUsFormController@ContactUsForm',
     'as' => 'contact.store'
 ]);
 
+//facebook face
 Route::get('/facebook', [
     'uses' => 'FacebookFormController@createForm'
-]);
+])->name('facebook');
 
 Route::post('/facebook', [
     'uses' => 'FacebookFormController@FacebookForm',
@@ -124,7 +132,7 @@ Route::get('/hosting/xoa/{id}', 'HostingController@getXoa');
 Route::post('/hosting/xoa/{id}', 'HostingController@postXoa');
 
 //Bai viet
-Route::get('/baiviet', 'BaiVietController@getDanhSach');
+Route::get('/baiviet', 'BaiVietController@getDanhSach')->name("baiviet");
 
 Route::get('/baiviet/them', 'BaiVietController@getThem');
 Route::post('/baiviet/them', 'BaiVietController@postThem');
@@ -134,3 +142,15 @@ Route::post('/baiviet/sua/{id}', 'BaiVietController@postSua');
 
 Route::get('/baiviet/xoa/{id}', 'BaiVietController@getXoa');
 Route::post('/baiviet/xoa/{id}', 'BaiVietController@postXoa');
+
+//Nguoi Dung (tai khoan)
+Route::get('/nguoidung', 'DSNguoiDungController@getDanhSach')->name("nguoidung");
+
+Route::get('/nguoidung/them', 'DSNguoiDungController@getThemHinhAnh');
+Route::post('/nguoidung/them', 'DSNguoiDungController@postThemHinhAnh');
+
+Route::get('/nguoidung/sua/{id}', 'DSNguoiDungController@getSua');
+Route::post('/nguoidung/sua/{id}', 'DSNguoiDungController@postSua');
+
+Route::get('/nguoidung/xoa/{id}', 'DSNguoiDungController@getXoa');
+Route::post('/nguoidung/xoa/{id}', 'DSNguoiDungController@postXoa');

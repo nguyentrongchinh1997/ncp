@@ -1,6 +1,8 @@
+
+
 <?php $__env->startSection('content'); ?>
 <div class="card">
-		<div class="card-header text-center"><h2>Quản lý giỏ hàng</h2></div>
+		<div class="card-header text-center"><h2>Quản lý đơn hàng</h2></div>
 		<div class="card-body">
 			<?php if(session('error')): ?>
 				<div class="alert alert-danger">
@@ -15,12 +17,7 @@
 						<th>Khách hàng</th>
 						<th>Sản phẩm</th>
 						<th>Trạng thái</th>
-						<?php if($user->level == 0): ?>
-							<th>Sửa</th>
-							<th>Xóa</th>
-						<?php else: ?>
-							<th>Xác nhận</th>
-						<?php endif; ?>
+						<th>Xác nhận</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -102,9 +99,7 @@
 										<td></td>
 									</tr>
 								</table>
-								
-							</td>
-							
+							</td>					
 							<td>
 								<?php if($value->status == 0): ?>
 									Chưa duyệt
@@ -114,13 +109,13 @@
 									Đã hủy
 								<?php endif; ?>
 							</td>
-							<td align="center">
-								<?php if($value->status == 0): ?>
-									<a href="<?php echo e(route('accept-cart', ['id' => $value->id])); ?>">Duyệt đơn</a>
-								<?php elseif($value->status == 1): ?>
-									Đã được duyệt
+							<td>
+								<?php if($value->status == 0 && auth()->user()->level == 1): ?>
+								<a href="<?php echo e(route('accept-cart', ['id' => $value->id])); ?>">
+									Duyệt đơn
+								</a>
 								<?php endif; ?>
-							</td>							
+							</td>
 						</tr>
 					<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 				</tbody>

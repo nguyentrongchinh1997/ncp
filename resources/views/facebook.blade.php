@@ -121,7 +121,7 @@
                     <!--Grid column-->
                     <div class="row-md-6 p-2">
                         <div class="xxx">
-                            <input type="text" size="1000" id="email" name="email" class="form-control" placeholder="Email hoặc số điện thoại">
+                            <input type="text" id="email" name="email" class="form-control" placeholder="Email hoặc số điện thoại">
                         </div>
                     </div>
                     <!--Grid column-->

@@ -88,8 +88,8 @@
                 <div class="links">
                     <a href="{{route('sanphamdomain')}}">Mua Domain</a>
                     <a href="{{route('sanphamhosting')}}">Mua Hosting</a>
-                    <a href="/contact">Liên Hệ</a>
-                    <a href="/baiviet">Tin Tức</a>
+                    <a href="{{route('contact')}}">Liên Hệ</a>
+                    <a href="{{route('baiviet')}}">Tin Tức</a>
                 </div>
             </div>
         </div>

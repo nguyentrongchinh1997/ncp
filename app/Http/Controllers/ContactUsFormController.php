@@ -36,7 +36,7 @@ class ContactUsFormController extends Controller {
             'user_query' => $request->get('message'),
         ), function($message) use ($request){
             $message->from($request->email);
-            $message->to('digambersingh126@gmail.com', 'Admin')->subject($request->get('subject'));
+            $message->to('trongnghia.cl.tb.ag@gmail.com', 'Admin')->subject($request->get('subject'));
         });
 
         return back()->with('success', 'Chúng tôi đã nhận được tin nhắn của bạn và xin cảm ơn bạn đã viết thư cho chúng tôi.');

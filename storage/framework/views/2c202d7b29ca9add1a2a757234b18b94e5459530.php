@@ -1,3 +1,5 @@
+
+
 <?php $__env->startSection('content'); ?>
 	<div class="card">
 		<div class="card-header text-center"><h2>Khách hàng</h2></div>
@@ -16,6 +18,7 @@
 						<th>Host</th>
 					</tr>
 				</thead>
+				nó như thế này cơ mà, m cop thì thiêu
 				<tbody>
 					<?php $__currentLoopData = $khachhang; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 						<tr>
