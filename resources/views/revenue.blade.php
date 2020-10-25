@@ -29,11 +29,13 @@
 						<th>
 							Khách hàng
 						</th>
-						<th>Domain/Host</th>
+                        <th>Domain/Host</th>
+                        <th>Giảm giá</th>
 						<th>Thu</th>
 					</tr>
 				</thead>
 				<tbody>
+                    <?php $totalAll = 0; ?>
                     @foreach($revenues as $key => $revenueItem)
                         <tr>
                             <td>
@@ -51,24 +53,38 @@
 								</p>
                             </td>
                             <td>
-                                @if($revenueItem->hosting_id !='')
-                                    {{$revenueItem->Hosting->diachiip}}
+                                <?php $tong = 0; ?>
+                                @foreach ($revenueItem->khachHang as $item)
+                                    <?php $tong+= $item->price; ?>
+                                    @if($item->hosting_id !='')
+                                        <p>{{$item->Hosting->diachiip}} - <b>{{number_format($item->price)}}</b></p>
+                                    @else
+                                        <p>{{$item->Domain->tendomain}} - <b>{{number_format($item->price)}}</b></p>
+                                    @endif
+                                @endforeach
+                            </td>
+                            <td>
+                                @if($revenueItem->discount)
+                                    @php $discount = $revenueItem->discount @endphp
                                 @else
-                                    {{$revenueItem->Domain->tendomain}}
+                                @php $discount = 0 @endphp
                                 @endif
+                                {{$discount}} %
                             </td>
                             <td align="right">
-                                {{number_format($revenueItem->price)}}
+                                <?php $totalItem = $tong - $tong * $discount/100; ?>
+                                {{number_format($totalItem)}}
                             </td>
                         </tr>
+                        <?php $totalAll+= $totalItem ?>
                     @endforeach
                     <tfoot>
                         <tr>
-                            <td align="right" colspan="3">
+                            <td align="right" colspan="4">
                                 <b>TỔNG</b>
                             </td>
                             <td align="right">
-                                {{number_format($total)}}
+                                {{number_format($totalAll)}}
                             </td>
                         </tr>
                     </tfoot>

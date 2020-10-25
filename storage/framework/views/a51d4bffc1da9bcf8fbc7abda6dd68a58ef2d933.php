@@ -29,11 +29,13 @@
 						<th>
 							Khách hàng
 						</th>
-						<th>Domain/Host</th>
+                        <th>Domain/Host</th>
+                        <th>Giảm giá</th>
 						<th>Thu</th>
 					</tr>
 				</thead>
 				<tbody>
+                    <?php $totalAll = 0; ?>
                     <?php $__currentLoopData = $revenues; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $revenueItem): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <tr>
                             <td>
@@ -52,27 +54,39 @@
 								</p>
                             </td>
                             <td>
-                                <?php if($revenueItem->hosting_id !=''): ?>
-                                    <?php echo e($revenueItem->Hosting->diachiip); ?>
-
+                                <?php $tong = 0; ?>
+                                <?php $__currentLoopData = $revenueItem->khachHang; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <?php $tong+= $item->price; ?>
+                                    <?php if($item->hosting_id !=''): ?>
+                                        <p><?php echo e($item->Hosting->diachiip); ?> - <b><?php echo e(number_format($item->price)); ?></b></p>
+                                    <?php else: ?>
+                                        <p><?php echo e($item->Domain->tendomain); ?> - <b><?php echo e(number_format($item->price)); ?></b></p>
+                                    <?php endif; ?>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                            </td>
+                            <td>
+                                <?php if($revenueItem->discount): ?>
+                                    <?php $discount = $revenueItem->discount ?>
                                 <?php else: ?>
-                                    <?php echo e($revenueItem->Domain->tendomain); ?>
-
+                                <?php $discount = 0 ?>
                                 <?php endif; ?>
+                                <?php echo e($discount); ?> %
                             </td>
                             <td align="right">
-                                <?php echo e(number_format($revenueItem->price)); ?>
+                                <?php $totalItem = $tong - $tong * $discount/100; ?>
+                                <?php echo e(number_format($totalItem)); ?>
 
                             </td>
                         </tr>
+                        <?php $totalAll+= $totalItem ?>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     <tfoot>
                         <tr>
-                            <td align="right" colspan="3">
+                            <td align="right" colspan="4">
                                 <b>TỔNG</b>
                             </td>
                             <td align="right">
-                                <?php echo e(number_format($total)); ?>
+                                <?php echo e(number_format($totalAll)); ?>
 
                             </td>
                         </tr>

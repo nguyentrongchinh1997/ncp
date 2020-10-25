@@ -22,7 +22,11 @@
 
 				<div class="form-group">
 					<label for="giatien">Giá tiền</label>
-					<input type="text" class="form-control @error('giatien') is-invalid @enderror" id="giatien" name="giatien"/>
+					<select class="form-control" name="giatien">
+						<option value="75000">75.000</option>
+						<option value="175000">175.000</option>
+						<option value="350000">350.000</option>
+					</select>
 					@error('giatien')
 						<span class="invalid-feedback" role="alert">{{ $message }}</span>
 					@enderror

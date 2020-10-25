@@ -8,6 +8,7 @@ use App\Domain;
 use App\Hosting;
 use App\KhachHang;
 use Carbon\Carbon;
+use App\Order;
 use Illuminate\Http\Request;
 use DB;
 
@@ -58,72 +59,76 @@ class RegisHostingController extends Controller
 		$date_start = $date_end = NULL; 
 
 		if (empty($request->date_start)) {
-			$revenues = KhachHang::all();
-			$total = KhachHang::sum('price');
+			$revenues = Order::all();
 		} else {
 			$date_start = date("$request->date_start 00:00:00");
 			$date_end = date("$request->date_end 23:59:59");
-			$revenues = KhachHang::whereBetween('created_at', [$date_start, $date_end])->get();
-			$total = KhachHang::whereBetween('created_at', [$date_start, $date_end])->sum('price');
+			$revenues = Order::whereBetween('created_at', [$date_start, $date_end])->get();
 		}
 		
-		return view('revenue', compact('revenues', 'total', 'date_start', 'date_end'));
+		return view('revenue', compact('revenues', 'date_start', 'date_end'));
 	}
 
 	public function accept($id)
 	{
 		DB::beginTransaction();
 		try {
-			$cart = RegisHosting::findOrFail($id);
-			$cart->status = 1; $cart->save();
-			$date_register = date('Y-m-d', strtotime($cart->created_at));
-			$t = strtotime($date_register);
+			$order = Order::where('id', $id)->first();
+			$order->status = 1;
+			$order->save();
 
-			if ($cart->type == 0) {
-				$date_exprie = date('Y-m-d', strtotime('+1 years', $t));
-			} else {
-				$date_exprie = date('Y-m-d', strtotime("+$cart->time month", $t));
+			foreach ($order->regishosting as $orderItem) {
+				$date_register = date('Y-m-d'); // ngày đăng ky sẽ là ngày duyệt đơn
+				$t = strtotime($date_register);
+
+				if ($orderItem->type == 0) {
+					$date_exprie = date('Y-m-d', strtotime('+1 years', $t));
+				} else {
+					$date_exprie = date('Y-m-d', strtotime("+$orderItem->time month", $t));
+				}
+	
+				if ($orderItem->type == 0) {
+					$domain = Domain::updateOrCreate(
+						[
+							'tendomain' => $orderItem->loaihosting,
+						],
+						[
+							'giatien' => $orderItem->price,
+							'status' => 1
+						]
+					);
+					KhachHang::create(
+						[
+							'order_id' => $id,
+							'domain_id' => $domain->id,
+							'price' => $orderItem->price,
+							'nguoidung_id' => $orderItem->nguoidung_id,
+							'date_register' => $date_register,
+							'date_exprie' => $date_exprie
+						]
+					);
+				} else {
+					$host = Hosting::where('status', 0)->where('giatien', $orderItem->price/$orderItem->time)->get()->random(1);
+					Hosting::where('id', $host[0]->id)->update(['status' => 1]);
+					KhachHang::create(
+						[
+							'order_id' => $id,
+							'hosting_id' => $host[0]->id,
+							'price' => $orderItem->price,
+							'nguoidung_id' => $orderItem->nguoidung_id,
+							'date_register' => $date_register,
+							'date_exprie' => $date_exprie
+						]
+					);
+				}
 			}
- 
-			if ($cart->type == 0) {
-				$domain = Domain::create([
-					'tendomain' => $cart->loaihosting,
-					'giatien' => $cart->price,
-					'status' => 1
-				]);
-				KhachHang::updateOrCreate(
-					[
-						'cart_id' => $id
-					],
-					[
-						'domain_id' => $domain->id,
-						'price' => $cart->price,
-						'nguoidung_id' => $cart->nguoidung_id,
-						'date_register' => $date_register,
-						'date_exprie' => $date_exprie
-					]
-				);
-			} else {
-				$host = Hosting::where('status', 0)->get()->random(1);
-				Hosting::where('id', $host[0]->id)->update(['status' => 1]);
-				KhachHang::updateOrCreate(
-					[
-						'cart_id' => $id
-					],
-					[
-						'hosting_id' => $host[0]->id,
-						'price' => $cart->price,
-						'nguoidung_id' => $cart->nguoidung_id,
-						'date_register' => $date_register,
-						'date_exprie' => $date_exprie
-					]
-				);
-			}
+			
 			DB::commit();
 
 			return back();
 		} catch (\Throwable $th) {
 			DB::rollBack();
+			dd($th->getMessage());
 			return back()->with('error', 'Không đủ domain hoặc hosting');
 		}
 	}
@@ -133,12 +138,12 @@ class RegisHostingController extends Controller
 		$user = auth()->user();
 
 		if ($user->level == 1) {
-			$regishosting = RegisHosting::latest()->get();
+			$orders = Order::latest()->get();
 		} else {
-			$regishosting = RegisHosting::where('nguoidung_id', auth()->user()->id)->latest()->get();
+			$orders = Order::where('nguoidung_id', auth()->user()->id)->latest()->get();
 		}
 		
-		return view('/sanpham/giohang', compact('regishosting', 'user'));
+		return view('/sanpham/giohang', compact('orders', 'user'));
 	}
 
 	public function getThem(Request $request)

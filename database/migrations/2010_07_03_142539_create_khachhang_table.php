@@ -22,8 +22,9 @@ class CreateKhachhangTable extends Migration
             $table->integer('nguoidung_id');
             $table->date('date_register');
             $table->date('date_exprie');
-            $table->integer('cart_id');
+            $table->unsignedBigInteger('order_id');
             $table->foreign('domain_id')->references('id')->on('domain');
+            $table->foreign('order_id')->references('id')->on('orders');
             $table->foreign('hosting_id')->references('id')->on('hosting');
         });
     }

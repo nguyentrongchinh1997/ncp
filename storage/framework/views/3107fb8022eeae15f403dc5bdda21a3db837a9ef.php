@@ -35,14 +35,11 @@ unset($__errorArgs, $__bag); ?>
 
 				<div class="form-group">
 					<label for="giatien">Giá tiền</label>
-					<input type="text" class="form-control <?php $__errorArgs = ['giatien'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>" id="giatien" name="giatien"/>
+					<select class="form-control" name="giatien">
+						<option value="75000">75.000</option>
+						<option value="175000">175.000</option>
+						<option value="350000">350.000</option>
+					</select>
 					<?php $__errorArgs = ['giatien'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :

@@ -14,13 +14,8 @@
 					<tr>
 						<th>STT</th>
 						<th>Khách hàng</th>
-						<th>Loại hosting</th>
-						<th>
-							Domain (Host)
-						</th>
-						<th>Loại</th>
+						<th>Sản phẩm</th>
 						<th>Trạng thái</th>
-						<th>Ngày tạo - Hết hạn</th>
 						@if($user->level == 0)
 							<th>Sửa</th>
 							<th>Xóa</th>
@@ -30,7 +25,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					@foreach($regishosting as $value)
+					@foreach($orders as $value)
 						<tr>
 							<td>{{ $loop->iteration }}</td>
 							<td>
@@ -44,41 +39,84 @@
 									SĐT: <b>{{$value->nguoiDung->phone}}</b>
 								</p>
 							</td>
-							<td>{{ $value->loaihosting }}</td>
 							<td>
-								@if(!empty($value->khachHang) && count($value->khachHang) > 0)
-									@foreach($value->khachHang as $kh)
-										{{($kh->domain_id == '') ? $kh->Hosting->diachiip : $kh->Domain->tendomain}}
+								<table>
+									<tr>
+										<th>
+											Domain (Hosting)
+										</th>
+										<th>
+											Giá
+										</th>
+										<th>Hết hạn</th>
+										@if($value->status != 1)
+										<th>Thao tác</th>
+										@endif
+									</tr>
+									@php $tong = 0; @endphp
+									@foreach($value->regishosting as $item)
+										@php $tong+= $item->price; @endphp
+										<tr>
+											<td>
+												{{$item->loaihosting}}
+											</td>
+											<td>
+												{{number_format($item->price)}}
+											</td>
+											<td>
+												{{date('d/m/Y', strtotime($item->created_at))}} - 
+												@if($item->type == 0)
+													{{date('d/m/Y', strtotime('+1 years', strtotime($item->created_at)))}}
+												@else
+													{{date('d/m/Y', strtotime("+$item->time month", strtotime($item->created_at)))}}
+												@endif
+											</td>
+											@if($value->status != 1)
+											<td>
+												<a href="{{ url('/sanpham/giohang/sua/' . $item->id) }}"><i class="fal fa-edit"></i></a><a href="{{ url('/sanpham/giohang/xoa/' . $item->id) }}"><i class="fal fa-trash-alt text-danger"></i></a>
+											</td>
+											@endif
+										</tr>
 									@endforeach
-								@endif
+									<tr>
+										<th>Giảm giá</th>
+										<th>
+											@if($value->discount)
+												@php $discount = $value->discount @endphp
+											@else
+											@php $discount = 0 @endphp
+											@endif
+											{{$discount}} %
+										</th>
+										<td></td>
+									</tr>
+									<tr>
+										<th>Thành tiền</th>
+										<th>
+											{{number_format($tong - $tong * $discount/100)}}
+										</th>
+										<td></td>
+									</tr>
+								</table>
+								
 							</td>
-							<td>
-								{{($value->type == 0 ? 'Domain' : 'Hosting')}}
-							</td>
-							<td>
-								{{($value->status == 0 ? 'Chờ xử lý' : 'Đã được duyệt')}}
-							</td>
-							<td>
-								{{date('d/m/Y', strtotime($value->created_at))}} - 
-								@if($value->type == 0)
-									{{date('d/m/Y', strtotime('+1 years', strtotime($value->created_at)))}}
-								@else
-									{{date('d/m/Y', strtotime("+$value->time month", strtotime($value->created_at)))}}
-								@endif
-							</td>
-							@if($user->level == 0)
-								<td class="text-center"><a href="{{ url('/sanpham/giohang/sua/' . $value->id) }}"><i class="fal fa-edit"></i></a></td>
-								<td class="text-center"><a href="{{ url('/sanpham/giohang/xoa/' . $value->id) }}"><i class="fal fa-trash-alt text-danger"></i></a></td>
-							@else
-								<td align="center">
-									@if($value->status == 0)
-										<a href="{{route('accept-cart', ['id' => $value->id])}}">Duyệt đơn</a>
-									@else
-										Đã được duyệt
-									@endif
-								</td>
-							@endif
 							
+							<td>
+								@if($value->status == 0)
+									Chưa duyệt
+								@elseif($value->status == 1)
+									Đã được duyệt
+								@else
+									Đã hủy
+								@endif
+							</td>
+							<td align="center">
+								@if($value->status == 0)
+									<a href="{{route('accept-cart', ['id' => $value->id])}}">Duyệt đơn</a>
+								@elseif($value->status == 1)
+									Đã được duyệt
+								@endif
+							</td>							
 						</tr>
 					@endforeach
 				</tbody>

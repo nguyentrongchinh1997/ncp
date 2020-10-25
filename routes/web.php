@@ -19,7 +19,7 @@ Route::group(['prefix' => 'cart', 'as' => 'cart.'], function(){
     Route::post('add', 'CartController@add')->name('add');
     Route::get('list', 'CartController@list')->name('list');
     Route::get('delete/{id}', 'CartController@delete')->name('delete');
-    Route::get('send', 'CartController@send')->name('send');
+    Route::post('send', 'CartController@send')->name('send');
 });
 
 Route::get('buy/domain', 'RegisHostingController@buyDomainForm')->name('buy-domain-form');

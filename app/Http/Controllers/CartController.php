@@ -6,23 +6,30 @@ use Illuminate\Http\Request;
 use App\Cart;
 use App\Domain;
 use App\RegisHosting;
+use App\Order;
+use DB;
 
 class CartController extends Controller
 {
 
     public function list()
     {
+        $discountCodes = DB::table('discount_codes')->where('expire', '>=', date('Y-m-d'))->get();
         $userId = auth()->user()->id;
         $carts = Cart::where('nguoidung_id', $userId)->latest()->get();
         $total = Cart::where('nguoidung_id', $userId)->sum('price');
 
-        return view('carts.list', compact('carts', 'total'));
+        return view('carts.list', compact('carts', 'total', 'discountCodes'));
     }
 
-    public function send()
+    public function send(Request $request)
     {
         $userId = auth()->user()->id;
         $carts = Cart::where('nguoidung_id', $userId)->latest()->get();
+        $order = Order::create([
+            'nguoidung_id' => auth()->user()->id,
+            'discount' => $request->code
+        ]);
 
         foreach($carts as $item) {
             RegisHosting::create([
@@ -31,6 +38,7 @@ class CartController extends Controller
                 'type' => $item->type,
                 'price' => $item->price,
                 'time' => $item->time,
+                'order_id' => $order->id
             ]);
         }
         Cart::where('nguoidung_id', $userId)->delete();

@@ -41,6 +41,11 @@ class NguoiDung extends Authenticatable
 		return $this->belongsTo(KhachHang::class, 'nguoidung_id', 'id');
 	}
 
+	public function order()
+	{
+		return $this->hasMany(Order::class);
+	}
+
 }
 
 class CustomResetPasswordNotification extends ResetPassword
