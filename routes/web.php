@@ -83,6 +83,9 @@ Route::get('/', function () {
 	return view('welcome');
 });
 
+Route::get('ma-giam-gia/them', 'DiscountCodeController@discountCodeAddForm')->name('discount-code-add-form');
+Route::post('ma-giam-gia/them', 'DiscountCodeController@discountCodeAdd')->name('discount-code-add');
+
 Route::get('doanhthu', 'RegisHostingController@revenue')->name('doanhthu');
 
 // Home

@@ -17,6 +17,7 @@
 				<li class="nav-item"><a class="nav-link" href="{{ url('/sanpham/giohang') }}"><i class="fal fa-shopping-bag"></i> Đơn hàng</a></li>
 				<li class="nav-item"><a class="nav-link" href="{{ url('/contactdanhsach') }}"><i class="fal fa-envelope"></i> Danh sách liên hệ</a></li>
 				<li class="nav-item"><a class="nav-link" href="{{ route('doanhthu') }}"><i class="fal fa-envelope"></i> Doanh thu</a></li>
+				<li class="nav-item"><a class="nav-link" href="{{ route('discount-code-add-form') }}"><i class="fal fa-envelope"></i> Mã giảm gía</a></li>
 			@endif
 			@endauth
 		</ul>
