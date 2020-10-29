@@ -1,77 +1,11 @@
 <!DOCTYPE html>
 <html lang="<?php echo e(str_replace('_', '-', app()->getLocale())); ?>">
 <head>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	
-	<!-- CSRF Token -->
-	<meta name="csrf-token" content="<?php echo e(csrf_token()); ?>" />
-	<base href="<?php echo e(asset('')); ?>">
-	<title><?php echo e(config('app.name', 'Laravel')); ?></title>
-	
-	<!-- Scripts -->
-	<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-	
-	<script src="<?php echo e(asset('/js/popper.min.js')); ?>" defer></script>
-	<script src="<?php echo e(asset('/js/bootstrap.min.js')); ?>" defer></script>
-	<?php echo $__env->yieldContent('javascript'); ?>
-	
-	<!-- Fonts -->
-	<link rel="dns-prefetch" href="//fonts.gstatic.com" />
-	<link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" />
-	
-	<!-- Favicon -->
-	<link href="<?php echo e(asset('/images/logo.png')); ?>" rel="shortcut icon" type="image/x-icon" />
-	
-	<!-- Styles -->
-	<link href="<?php echo e(asset('/css/bootstrap.min.css')); ?>" rel="stylesheet" />
-	<link href="<?php echo e(asset('/css/fontawesome.min.css')); ?>" rel="stylesheet" />
-	<link href="<?php echo e(asset('/css/custom.css')); ?>" rel="stylesheet" />
-	<script src="<?php echo e(asset('ckeditor_full/ckeditor.js')); ?>"></script>
-	<script>
-		CKEDITOR.replace('noidung', {height: 1000});
-	</script>
-	<script src="<?php echo e(asset('/js/alert.js')); ?>"></script>
-
-	<style>
-		tr:hover {
-			background-color:#f5f5f5;
-		}
-		footer {
-		    bottom: 0;
-		    width: 100%;
-		   
-		}
-		main{
-			min-height:260px;
-		}
-
-		.footer-row1{
-			padding-top: 2%;
-			background: #454648!important;
-			display: flex;
-		  	align-items: center;
-		  	justify-content: center;
-		}
-		.footer-row2{
-			background: white;
-			font-weight: bold;
-		}
-		.text-footer{
-			color: white;
-		}
-		.logo-footer{
-			padding: 4px;
-		}
-
-		#cart-text{
-			color: #00b59c;
-		}
-	</style>
 </head>
 <body data-spy="scroll" data-target=".navbar" data-offset="50">
 	<div class="container-fluid">
-		<nav class="navbar navbar-expand-sm bg-dark navbar-dark ">
+		<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
 			<a class="navbar-brand" href="<?php echo e(url('/')); ?>">
 				<img src="<?php echo e(asset('images/logo.png')); ?>" width="30" height="30" class="d-inline-block align-top" alt="" />
 				<?php echo e(config('app.name', 'Laravel')); ?>
@@ -83,6 +17,7 @@
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav mr-auto">
 					<?php if(auth()->guard()->check()): ?>
+					<?php if(auth()->user()->level==1): ?>
 						<li class="nav-item"><a class="nav-link" href="<?php echo e(url('/domain')); ?>"><i class="fal fa-globe"></i> Tên miền</a></li>
 						<li class="nav-item"><a class="nav-link" href="<?php echo e(url('/hosting')); ?>"><i class="fal fa-cloud"></i> Hosting</a></li>
 						<li class="nav-item"><a class="nav-link" href="<?php echo e(url('/khachhang')); ?>"><i class="fal fa-users"></i> Khách Hàng</a></li>
@@ -90,6 +25,7 @@
 						<li class="nav-item"><a class="nav-link" href="<?php echo e(url('/sanpham/giohang')); ?>"><i class="fal fa-shopping-bag"></i> Đơn hàng</a></li>
 						<li class="nav-item"><a class="nav-link" href="<?php echo e(url('/contactdanhsach')); ?>"><i class="fal fa-envelope"></i> Danh sách liên hệ</a></li>
 						<li class="nav-item"><a class="nav-link" href="<?php echo e(route('doanhthu')); ?>"><i class="fal fa-envelope"></i> Doanh thu</a></li>
+					<?php endif; ?>
 					<?php endif; ?>
 				</ul>
 				<ul class="navbar-nav ml-auto">
@@ -118,12 +54,13 @@
 		</nav>
 		
 		<main class="pt-2">
-			<?php echo $__env->yieldContent('content'); ?>
+				<?php echo $__env->yieldContent('content'); ?>
 		</main>
-
 		
-
+		
+	
 	</div>
 </body>
 </html>
-<?php echo $__env->make('layouts.footer', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH E:\Wamp\www\ncp\resources\views/layouts/app.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layouts.footer', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+<?php echo $__env->make('layouts.header', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH E:\Wamp\www\ncp\resources\views/layouts/app.blade.php ENDPATH**/ ?>

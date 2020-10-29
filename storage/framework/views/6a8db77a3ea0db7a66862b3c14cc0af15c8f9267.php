@@ -3,7 +3,7 @@
 <?php $__env->startSection('content'); ?>
         <style>
             html, body {
-                background-color: white;
+                background-color: #BEEEED;
                 color: #636b6f;
                 font-family: 'Nunito', sans-serif;
                 font-weight: 200;
@@ -52,20 +52,33 @@
             .m-b-md {
                 margin-bottom: 30px;
             }
+            nav{
+                display: none!important;
+            }
+            main{
+                min-height: 365px!important;
+            }
         </style>
 
 <div class="flex-center position-ref">
-            <?php if(Route::has('login')): ?>
+         <?php if(Route::has('login')): ?>
                 <div class="top-right links">
                     <?php if(auth()->guard()->check()): ?>
                         <a href="<?php echo e(url('/home')); ?>">Trang Quản Lý</a>
 
                         
+                            <?php else: ?>
+                        <a href="<?php echo e(route('login')); ?>">Đăng Nhập</a>
+
+                        <?php if(Route::has('register')): ?>
+                            <a href="<?php echo e(route('register')); ?>">Đăng Ký</a>
+                        <?php endif; ?>
+                        
 
                     <?php endif; ?>
                 </div>
             <?php endif; ?>
-
+       
             <div class="content">
                 <div class="title m-b-md">
                     NCP Xin Chào !!!

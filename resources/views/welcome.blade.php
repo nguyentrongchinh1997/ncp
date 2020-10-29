@@ -3,7 +3,7 @@
 @section('content')
         <style>
             html, body {
-                background-color: white;
+                background-color: #BEEEED;
                 color: #636b6f;
                 font-family: 'Nunito', sans-serif;
                 font-weight: 200;
@@ -52,27 +52,33 @@
             .m-b-md {
                 margin-bottom: 30px;
             }
+            nav{
+                display: none!important;
+            }
+            main{
+                min-height: 365px!important;
+            }
         </style>
 
 <div class="flex-center position-ref">
-            @if (Route::has('login'))
+         @if (Route::has('login'))
                 <div class="top-right links">
                     @auth
                         <a href="{{ url('/home') }}">Trang Quản Lý</a>
 
-                        {{--
+                        
                             @else
                         <a href="{{ route('login') }}">Đăng Nhập</a>
 
                         @if (Route::has('register'))
                             <a href="{{ route('register') }}">Đăng Ký</a>
                         @endif
-                        --}}
+                        
 
                     @endauth
                 </div>
             @endif
-
+       
             <div class="content">
                 <div class="title m-b-md">
                     NCP Xin Chào !!!

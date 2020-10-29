@@ -1,6 +1,6 @@
 <!-- Page Footer-->
       <footer class="page-footer font-small blue pt-4">
-        <div class="container-fluid text-center text-md-left footer-row1">
+        <div class="container-fluid text-center text-md-left footer-row1 bg-dark">
           <div class="container">
             <div class="row">
               <div class="col-6 col-md-4">
