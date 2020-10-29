@@ -15,23 +15,13 @@
 					<tr>
 						<th>STT</th>
 						<th>Khách hàng</th>
-						<th>Loại hosting</th>
-						<th>
-							Domain (Host)
-						</th>
-						<th>Loại</th>
+						<th>Sản phẩm</th>
 						<th>Trạng thái</th>
-						<th>Ngày tạo - Hết hạn</th>
-						<?php if($user->level == 0): ?>
-							<th>Sửa</th>
-							<th>Xóa</th>
-						<?php else: ?>
-							<th>Xác nhận</th>
-						<?php endif; ?>
+						<th>Xác nhận</th>
 					</tr>
 				</thead>
 				<tbody>
-					<?php $__currentLoopData = $regishosting; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+					<?php $__currentLoopData = $orders; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 						<tr>
 							<td><?php echo e($loop->iteration); ?></td>
 							<td>
@@ -45,61 +35,87 @@
 									SĐT: <b><?php echo e($value->nguoiDung->phone); ?></b>
 								</p>
 							</td>
-							<td><?php echo e($value->loaihosting); ?></td>
 							<td>
-								<?php if(!empty($value->khachHang) && count($value->khachHang) > 0): ?>
-									<?php $__currentLoopData = $value->khachHang; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $kh): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-										<?php echo e(($kh->domain_id == '') ? $kh->Hosting->diachiip : $kh->Domain->tendomain); ?>
+								<table>
+									<tr>
+										<th>
+											Domain (Hosting)
+										</th>
+										<th>
+											Giá
+										</th>
+										<th>Hết hạn</th>
+										<?php if($value->status != 1): ?>
+										<th>Thao tác</th>
+										<?php endif; ?>
+									</tr>
+									<?php $tong = 0; ?>
+									<?php $__currentLoopData = $value->regishosting; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+										<?php $tong+= $item->price; ?>
+										<tr>
+											<td>
+												<?php echo e($item->loaihosting); ?>
 
+											</td>
+											<td>
+												<?php echo e(number_format($item->price)); ?>
+
+											</td>
+											<td>
+												<?php echo e(date('d/m/Y', strtotime($item->created_at))); ?> - 
+												<?php if($item->type == 0): ?>
+													<?php echo e(date('d/m/Y', strtotime('+1 years', strtotime($item->created_at)))); ?>
+
+												<?php else: ?>
+													<?php echo e(date('d/m/Y', strtotime("+$item->time month", strtotime($item->created_at)))); ?>
+
+												<?php endif; ?>
+											</td>
+											<?php if($value->status != 1): ?>
+											<td>
+												<a href="<?php echo e(url('/sanpham/giohang/sua/' . $item->id)); ?>"><i class="fal fa-edit"></i></a><a href="<?php echo e(url('/sanpham/giohang/xoa/' . $item->id)); ?>"><i class="fal fa-trash-alt text-danger"></i></a>
+											</td>
+											<?php endif; ?>
+										</tr>
 									<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-								<?php endif; ?>
-							</td>
-							<td>
-								<?php echo e(($value->type == 0 ? 'Domain' : 'Hosting')); ?>
+									<tr>
+										<th>Giảm giá</th>
+										<th>
+											<?php if($value->discount): ?>
+												<?php $discount = $value->discount ?>
+											<?php else: ?>
+											<?php $discount = 0 ?>
+											<?php endif; ?>
+											<?php echo e($discount); ?> %
+										</th>
+										<td></td>
+									</tr>
+									<tr>
+										<th>Thành tiền</th>
+										<th>
+											<?php echo e(number_format($tong - $tong * $discount/100)); ?>
 
-							</td>
+										</th>
+										<td></td>
+									</tr>
+								</table>
+							</td>					
 							<td>
 								<?php if($value->status == 0): ?>
-									<a>Chờ duyệt</a>
-								<?php endif; ?>
-								<?php if($value->status == 1): ?>
-									<a>Đã thanh toán</a>
-								<?php endif; ?>
-								<?php if($value->status == 2): ?>
-									<a class="text-danger font-weight-bold">Đã hủy</a>
+									Chưa duyệt
+								<?php elseif($value->status == 1): ?>
+									Đã được duyệt
+								<?php else: ?>
+									Đã hủy
 								<?php endif; ?>
 							</td>
 							<td>
-								<?php echo e(date('d/m/Y', strtotime($value->created_at))); ?> - 
-								<?php if($value->type == 0): ?>
-									<?php echo e(date('d/m/Y', strtotime('+1 years', strtotime($value->created_at)))); ?>
-
-								<?php else: ?>
-									<?php echo e(date('d/m/Y', strtotime("+$value->time month", strtotime($value->created_at)))); ?>
-
+								<?php if($value->status == 0 && auth()->user()->level == 1): ?>
+								<a href="<?php echo e(route('accept-cart', ['id' => $value->id])); ?>">
+									Duyệt đơn
+								</a>
 								<?php endif; ?>
 							</td>
-							<?php if($user->level == 0): ?>
-								<td class="text-center"><a href="<?php echo e(url('/sanpham/giohang/sua/' . $value->id)); ?>"><i class="fal fa-edit"></i></a></td>
-								<td class="text-center"><a href="<?php echo e(url('/sanpham/giohang/xoa/' . $value->id)); ?>"><i class="fal fa-trash-alt text-danger"></i></a></td>
-							<?php else: ?>
-							
-								<td align="center">
-								<form action="<?php echo e(route('accept-cart', ['id' => $value->id])); ?>" method="get">
-								
-								<select class="">
-									<option value="">-- Chọn trạng thái --</option>
-									<option value="$value->status=0">Chưa duyệt</option>
-									<option value="$value->status=1">Đã thanh toán</option>
-									<option value="$value->status=2">Hủy</option>
-								</select>
-								<button type="submit">Gửi</button>
-								</form>
-								</td>
-								
-								
-							<?php endif; ?>
-							
 						</tr>
 					<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 				</tbody>

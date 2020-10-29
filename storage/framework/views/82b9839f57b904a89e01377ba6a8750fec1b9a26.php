@@ -8,6 +8,8 @@
 		<div class="card-body">
 			<div class="row">
                 <div class="col-lg-12">
+                <form action="<?php echo e(route('cart.send')); ?>" method="post">
+                        <?php echo csrf_field(); ?>
                     <table style="width: 100%">
                         <tr>
                             <th>Sản phẩm</th>
@@ -47,16 +49,38 @@
                             </td>
                             <td></td>
                         </tr>
+                        <tr>
+                            <td style="text-align: right" colspan="2">Mã giảm giá (nếu có)</td>
+                            <td>
+                                <?php $__currentLoopData = $discountCodes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $code): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <label for="">
+                                        <input name="code" onclick="pick(<?php echo e($code->discount); ?>)" type="radio" value="<?php echo e($code->discount); ?>">
+                                        <?php echo e($code->name); ?>
+
+                                    </label>
+                                    <br>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: right" colspan="2">Thành tiền</td>
+                            <td style="text-align: right">
+                                <span id="last-price"><?php echo e(number_format($total)); ?></span>
+                                
+                            </td>
+                            <td></td>
+                        </tr>
                     </table>
                     <br><br>
                     <center>
-                        <a href="<?php echo e(route('cart.send')); ?>">
-                            <button class="btn btn-primary">Gửi đơn hàng</button>
-                        </a>
+                        <button type="submit" class="btn btn-primary">Gửi đơn hàng</button>
                     </center>
+                </form>
+                    
                 </div>
                 <div class="col-lg-4">
-                    l
+                    
                 </div>
             </div>
 		</div>
@@ -69,6 +93,14 @@
     }
 </style>
 <script>
+    function pick(discount)
+    {
+        total = "<?php echo e($total); ?>";
+        lastPrice =  total - total * discount/100;
+        $('#last-price').html(lastPrice);
+        //alert(discount);
+
+    }
 	<?php if(session('success')): ?>
 		Swal.fire({
 			title: "<?php echo e(session('success')); ?>",

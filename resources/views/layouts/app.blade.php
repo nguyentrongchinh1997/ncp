@@ -29,19 +29,41 @@
 	<link href="{{ asset('/css/custom.css') }}" rel="stylesheet" />
 	<script src="{{ asset('ckeditor_full/ckeditor.js') }}"></script>
 	<script>
-		CKEDITOR.replace('noidung', {height: 500});
+		CKEDITOR.replace('noidung', {height: 1000});
 	</script>
-	<script src="https://truyen88.net/js/admin/sweetalert2@9.js"></script>
+	<script src="{{ asset('/js/alert.js') }}"></script>
 
 	<style>
 		tr:hover {
 			background-color:#f5f5f5;
 		}
 		footer {
-		    position: fixed;
 		    bottom: 0;
 		    width: 100%;
+		   
 		}
+		main{
+			min-height:260px;
+		}
+
+		.footer-row1{
+			padding-top: 2%;
+			background: #454648!important;
+			display: flex;
+		  	align-items: center;
+		  	justify-content: center;
+		}
+		.footer-row2{
+			background: white;
+			font-weight: bold;
+		}
+		.text-footer{
+			color: white;
+		}
+		.logo-footer{
+			padding: 4px;
+		}
+
 		#cart-text{
 			color: #00b59c;
 		}
@@ -97,81 +119,8 @@
 		<main class="pt-2">
 			@yield('content')
 		</main>
-		
-		
 
-	<footer>
-		<a class="footer-text" >Bản quyền &copy; {{ date('Y') }} bởi <a class="footer-text-in text-decoration-none" href="{{ url('/') }}">{{ config('app.name', 'Laravel') }}.</a></a>
-
-		<button onclick="topFunction()" id="myBtn" title="Go to top"><i class="arrow up"></i></button>
-			<style type="text/css">
-				a.footer-text-in{
-					color: black;
-				}
-
-				a.footer-text-in:hover{
-					color: blue;
-				}
-
-				footer{
-					background: #565551;
-					font-size: 25px;
-					text-align: center;
-				}
-
-				#myBtn {
-				  display: none;
-				  position: fixed;
-				  bottom: 20px;
-				  right: 30px;
-				  z-index: 99;
-				  font-size: 18px;
-				  border: none;
-				  outline: none;
-				  background-color: red;
-				  color: black;
-				  cursor: pointer;
-				  padding: 15px;
-				  border-radius: 4px;
-				}
-
-				#myBtn:hover {
-				  background-color: green;
-				}
-
-				.up {
-			    transform: rotate(-135deg);
-			    -webkit-transform: rotate(-135deg);
-				}
-
-			    i.up {
-			    border: solid black;
-			    border-width: 0 3px 3px 0;
-			    display: inline-block;
-			    padding: 3px;
-			</style>
-			<script>
-			//Get the button
-			var mybutton = document.getElementById("myBtn");
-
-			// When the user scrolls down 20px from the top of the document, show the button
-			window.onscroll = function() {scrollFunction()};
-
-			function scrollFunction() {
-			  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-			    mybutton.style.display = "block";
-			  } else {
-			    mybutton.style.display = "none";
-			  }
-			}
-
-			// When the user clicks on the button, scroll to the top of the document
-			function topFunction() {
-			  document.body.scrollTop = 0;
-			  document.documentElement.scrollTop = 0;
-			}
-			</script>
-	</footer>
+		@extends('layouts.footer')
 
 	</div>
 </body>

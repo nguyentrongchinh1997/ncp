@@ -128,7 +128,7 @@ class RegisHostingController extends Controller
 			return back();
 		} catch (\Throwable $th) {
 			DB::rollBack();
-			dd($th->getMessage());
+			//dd($th->getMessage());
 			return back()->with('error', 'Không đủ domain hoặc hosting');
 		}
 	}

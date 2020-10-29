@@ -1,0 +1,9 @@
+{
+    "name": "NCP",
+    "image": "images/logo.png",
+    "auth": "nghiacp",
+    "email": "trongnghia.cl.tb.ag@gmail.com",
+    "website": "https://giayphut.com",
+    "configKey": "ncp",
+    "version": "1.0"
+}

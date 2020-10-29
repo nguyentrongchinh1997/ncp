@@ -18,7 +18,6 @@
 						<th>Host</th>
 					</tr>
 				</thead>
-				nó như thế này cơ mà, m cop thì thiêu
 				<tbody>
 					@foreach($khachhang as $key => $value)
 						<tr>

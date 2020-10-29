@@ -49,15 +49,15 @@
                     <div class="carousel-item active" data-interval="1000">
                         <div class="d-flex justify-content-center" style="height: 100%; background-color: #555; border-bottom: 2px solid #ffa500;">
                             <div class="text-center carousel-sub-item">
-                                <img src="/ncp/public/images/company.svg" class=" carousel-sub-item-imge" >
+                                <img src="<?php echo e(asset('/images/icon/company.svg')); ?>" class=" carousel-sub-item-imge" >
                                 <p class="card-title">Doanh nghiệp</p>
                             </div>
                             <div class="text-center carousel-sub-item">
-                                <img src="/ncp/public/images/wordpress.svg" class=" carousel-sub-item-imge" >
+                                <img src="<?php echo e(asset('/images/icon/wordpress.svg')); ?>" class=" carousel-sub-item-imge" >
                                 <p class="card-title">Wordpress Hosting</p>
                             </div>
                             <div class="text-center carousel-sub-item">
-                                <img src="/ncp/public/images/vps.svg" class=" carousel-sub-item-imge">
+                                <img src="<?php echo e(asset('/images/icon/vps.svg')); ?>" class=" carousel-sub-item-imge">
                                 <p class="card-title">VPS</p>
                             </div>
                         </div>
@@ -66,15 +66,15 @@
                     <div class="carousel-item" data-interval="10000">
                         <div class="d-flex justify-content-center" style="height: 100%; width: 100%; background-color: #555; border-bottom: 2px solid #ffa500;">
                             <div class="text-center carousel-sub-item">
-                                <img src="/ncp/public/images/caocap.svg" class=" carousel-sub-item-imge">
+                                <img src="<?php echo e(asset('/images/icon/caocap.svg')); ?>" class=" carousel-sub-item-imge">
                                 <p class="card-title">Cao cấp</p>
                             </div>
                             <div class="text-center carousel-sub-item">
-                                <img src="/ncp/public/images/tieuchuan.svg" class=" carousel-sub-item-imge">
+                                <img src="<?php echo e(asset('/images/icon/tieuchuan.svg')); ?>" class=" carousel-sub-item-imge">
                                 <p class="card-title">Tiêu chuẩn</p>
                             </div>
                             <div class="text-center carousel-sub-item">
-                                <img src="/ncp/public/images/sale.svg" class=" carousel-sub-item-imge">
+                                <img src="<?php echo e(asset('/images/icon/sale.svg')); ?>" class=" carousel-sub-item-imge">
                                 <p class="card-title">Khuyến mãi</p>
                             </div>
                         </div>
