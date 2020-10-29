@@ -10,6 +10,7 @@
 	<div class="collapse navbar-collapse" id="navbarSupportedContent">
 		<ul class="navbar-nav mr-auto">
 			<?php if(auth()->guard()->check()): ?>
+			<?php if(auth()->user()->level==1): ?>
 				<li class="nav-item"><a class="nav-link" href="<?php echo e(url('/domain')); ?>"><i class="fal fa-globe"></i> Tên miền</a></li>
 				<li class="nav-item"><a class="nav-link" href="<?php echo e(url('/hosting')); ?>"><i class="fal fa-cloud"></i> Hosting</a></li>
 				<li class="nav-item"><a class="nav-link" href="<?php echo e(url('/khachhang')); ?>"><i class="fal fa-users"></i> Khách Hàng</a></li>
@@ -17,6 +18,7 @@
 				<li class="nav-item"><a class="nav-link" href="<?php echo e(url('/sanpham/giohang')); ?>"><i class="fal fa-shopping-bag"></i> Đơn hàng</a></li>
 				<li class="nav-item"><a class="nav-link" href="<?php echo e(url('/contactdanhsach')); ?>"><i class="fal fa-envelope"></i> Danh sách liên hệ</a></li>
 				<li class="nav-item"><a class="nav-link" href="<?php echo e(route('doanhthu')); ?>"><i class="fal fa-envelope"></i> Doanh thu</a></li>
+			<?php endif; ?>
 			<?php endif; ?>
 		</ul>
 		<ul class="navbar-nav ml-auto">
@@ -42,5 +44,4 @@
 			<?php endif; ?>
 		</ul>
 	</div>
-</nav>
-<?php /**PATH E:\Wamp\www\ncp\resources\views/layouts/container.blade.php ENDPATH**/ ?>
+</nav><?php /**PATH E:\Wamp\www\ncp\resources\views/layouts/container.blade.php ENDPATH**/ ?>
