@@ -85,12 +85,10 @@ class CartController extends Controller
         $inputs = $request->all();
         $price = $inputs['option'] * 1000 * $inputs['time'];
 
-        Cart::updateOrCreate(
+        Cart::create(
             [
                 'product' => $inputs['product'],
-                'nguoidung_id' => auth()->user()->id
-            ],
-            [
+                'nguoidung_id' => auth()->user()->id,
                 'price' => $price,
                 'type' => 1,
                 'time' => $inputs['time'],

@@ -41,4 +41,4 @@
 	#cart-text{
 		color: #00b59c;
 	}
-</style><?php /**PATH E:\Wamp\www\ncp\resources\views/layouts/css.blade.php ENDPATH**/ ?>
+</style><?php /**PATH C:\xampp\htdocs\ncp\resources\views/layouts/css.blade.php ENDPATH**/ ?>

@@ -43,4 +43,4 @@
 			<?php endif; ?>
 		</ul>
 	</div>
-</nav><?php /**PATH E:\Wamp\www\ncp\resources\views/layouts/container.blade.php ENDPATH**/ ?>
+</nav><?php /**PATH C:\xampp\htdocs\ncp\resources\views/layouts/container.blade.php ENDPATH**/ ?>

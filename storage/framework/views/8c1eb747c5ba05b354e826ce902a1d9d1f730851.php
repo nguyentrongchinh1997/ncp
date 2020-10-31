@@ -77,4 +77,4 @@
             
           </div>
         </div>
-      </footer><?php /**PATH E:\Wamp\www\ncp\resources\views/layouts/footer.blade.php ENDPATH**/ ?>
+      </footer><?php /**PATH C:\xampp\htdocs\ncp\resources\views/layouts/footer.blade.php ENDPATH**/ ?>
