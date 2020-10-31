@@ -254,14 +254,14 @@
                         <!--Header-->
                         <div class="text-center">
                           <h3 class="white-text">
-                            <i class="fas fa-user white-text"></i> Đăng Nhập:</h3>
+                            <i class="fas fa-user white-text"></i> Đăng Nhập</h3>
                           <hr class="hr-light">
                         </div>
                         <!--Body-->
                         <form method="post" action="{{ route('login') }}">
                         @csrf
-                        <div class="form-group md-form">
-                            <label class="active" for="email">Tài khoản</label>
+                        <div class="form-group">
+                            <label class="" for="email">Tài khoản</label>
                             <i class="fas fa-envelope prefix white-text active"></i>
                             <input type="text" class="white-text form2 form-control{{ ($errors->has('email') || $errors->has('username')) ? ' is-invalid' : '' }}" id="email" name="email" value="{{ old('email') }}" placeholder="Email address or Username" required />
                             @if ($errors->has('email') || $errors->has('username'))
@@ -270,7 +270,7 @@
                         </div>
 
 
-                        <div class="form-group md-form">
+                        <div class="form-group">
                             <label for="form4">Mật khẩu</label>
                             <i class="fas fa-lock prefix white-text active"></i>
                             <input type="password" class="white-text form-control @error('password') is-invalid @enderror" id="password" name="password" placeholder="Password" required />
@@ -296,17 +296,19 @@
                             <a class="btn-regis-reset text-decoration-none" href="{{ route('password.request') }}">Quên mật khẩu?</a>
                             @endif
                         </div>
-                        <div class="inline-ul text-center">
-                            <a class="p-2 m-2 tw-ic">
-                              <i class="fab fa-twitter white-text"></i>
-                            </a>
-                            <a class="p-2 m-2 li-ic">
-                              <i class="fab fa-facebook white-text"> </i>
-                            </a>
-                            <a class="p-2 m-2 ins-ic">
-                              <i class="fab fa-google white-text"> </i>
-                            </a>
+                        
+                        <div class="row mt-4 form-group mb-0">
+                            <div class="col-md-4 col-sm-6 all-center">
+                                <img src="{{ asset('/images/icon/facebook.svg') }}" width="30%" />
+                            </div>
+                            <div class="col-md-4 col-sm-6 all-center">
+                                <img src="{{ asset('/images/icon/twitter.svg') }}" width="30%"/>
+                            </div>
+                            <div class="col-md-4 col-sm-6 all-center">
+                                <img src="{{ asset('/images/icon/ins.svg') }}" width="30%"/>
+                            </div>
                         </div>
+                        
                         </form>
                       </div>
                     </div>

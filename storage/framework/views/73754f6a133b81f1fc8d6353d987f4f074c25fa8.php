@@ -7,6 +7,12 @@
 		min-height:260px;
 	}
 
+	.all-center{
+		display: flex;
+	  	align-items: center;
+	  	justify-content: center;
+	}
+
 	tr:hover {
 		background-color:#f5f5f5;
 	}
