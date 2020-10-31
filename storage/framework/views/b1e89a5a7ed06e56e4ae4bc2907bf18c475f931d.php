@@ -18,18 +18,17 @@
 				<li class="nav-item"><a class="nav-link" href="<?php echo e(url('/sanpham/giohang')); ?>"><i class="fal fa-shopping-bag"></i> Đơn hàng</a></li>
 				<li class="nav-item"><a class="nav-link" href="<?php echo e(url('/contactdanhsach')); ?>"><i class="fal fa-envelope"></i> Danh sách liên hệ</a></li>
 				<li class="nav-item"><a class="nav-link" href="<?php echo e(route('doanhthu')); ?>"><i class="fal fa-envelope"></i> Doanh thu</a></li>
+				<li class="nav-item"><a class="nav-link" href="<?php echo e(route('discount-code-add-form')); ?>"><i class="fal fa-envelope"></i> Mã giảm gía</a></li>
 			<?php endif; ?>
 			<?php endif; ?>
 		</ul>
 		<ul class="navbar-nav ml-auto">
+
 			<?php if(auth()->guard()->guest()): ?>
-				<li class="nav-item"><a class="nav-link" href="<?php echo e(route('login')); ?>"><i class="fal fa-sign-in-alt"></i> Đăng nhập</a></li>
-				<?php if(Route::has('register')): ?>
-					<li class="nav-item"><a class="nav-link" href="<?php echo e(route('register')); ?>"><i class="fal fa-user-plus"></i> Đăng ký</a></li>
-				<?php endif; ?>
+			
 			<?php else: ?>
 				<li class="nav-item">
-					<img src="<?php echo e(asset('images/cart.svg')); ?>" width="60" height="30" alt="cart" />
+					<img src="<?php echo e(asset('images/icon/cart.svg')); ?>" width="60" height="30" alt="cart" />
 					<a id="cart-text" class="nav-link" href="<?php echo e(route('cart.list')); ?>">Giỏ hàng</a>
 				</li>
 				<li class="nav-item dropdown">

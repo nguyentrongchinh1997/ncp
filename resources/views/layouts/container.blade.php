@@ -22,14 +22,17 @@
 			@endauth
 		</ul>
 		<ul class="navbar-nav ml-auto">
+
 			@guest
+			{{--
 				<li class="nav-item"><a class="nav-link" href="{{ route('login') }}"><i class="fal fa-sign-in-alt"></i> Đăng nhập</a></li>
 				@if (Route::has('register'))
 					<li class="nav-item"><a class="nav-link" href="{{ route('register') }}"><i class="fal fa-user-plus"></i> Đăng ký</a></li>
 				@endif
+			--}}
 			@else
 				<li class="nav-item">
-					<img src="{{ asset('images/cart.svg') }}" width="60" height="30" alt="cart" />
+					<img src="{{ asset('images/icon/cart.svg') }}" width="60" height="30" alt="cart" />
 					<a id="cart-text" class="nav-link" href="{{route('cart.list')}}">Giỏ hàng</a>
 				</li>
 				<li class="nav-item dropdown">

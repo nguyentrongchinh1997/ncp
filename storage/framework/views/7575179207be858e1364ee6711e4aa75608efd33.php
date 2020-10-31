@@ -30,5 +30,4 @@
 </script>
 <script src="<?php echo e(asset('/js/alert.js')); ?>"></script>
 
-
 <?php echo $__env->make('layouts.css', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH E:\Wamp\www\ncp\resources\views/layouts/header.blade.php ENDPATH**/ ?>

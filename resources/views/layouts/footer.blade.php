@@ -5,7 +5,7 @@
             <div class="row">
               <div class="col-6 col-md-4">
                 <a href="text-center">
-                    <img class="logo-footer" src="{{ asset('/images/logo.png') }}" width="20%" height="30%" /><a href="{{ config('app.name')}}" class="h1">{{ config('app.name')}}</a>
+                    <img class="logo-footer" src="{{ asset('/images/logo.png') }}" width="20%" height="30%" /><a href="" class="h1">{{ config('app.name')}}</a>
                 </a>
                 
                 <p class="text-footer">Công ty TNHH Công Nghệ NCP được thành lập từ tháng 10/2019 bởi các thành viên xuất thân từ các công ty hàng đầu về ISP, Datacenter, máy chủ và thiết bị tin học, mạng máy tính, truyền thông, và dịch vụ CNTT</p>

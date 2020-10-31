@@ -30,4 +30,4 @@
 </script>
 <script src="{{ asset('/js/alert.js') }}"></script>
 
-@extends('layouts.css')
+@include('layouts.css')

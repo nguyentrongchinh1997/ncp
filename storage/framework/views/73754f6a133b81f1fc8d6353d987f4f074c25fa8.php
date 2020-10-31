@@ -13,7 +13,7 @@
 
 	footer {
 	    bottom: 0;
-	    width: 100%; 
+	    width: 100%;
 	}
 	.footer-row1{
 		padding-top: 2%;
