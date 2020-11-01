@@ -165,10 +165,10 @@ class RegisHostingController extends Controller
 	// Xử lý xóa
 	public function postXoa(Request $request, $id)
 	{
-		$orders = Domain::find($id);
+		$orders = Order::find($id);
 		$orders->delete();
 		
-		return redirect('/orders');
+		return redirect('/sanpham/giohang');
 	}
 
 }

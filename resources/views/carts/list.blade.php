@@ -31,8 +31,8 @@
                                     {{number_format($item->price)}}
                                 </td>
                                 <td>
-                                    <a  href="{{route('cart.delete', ['id' => $item->id])}}">
-                                        <button class="btn btn-danger">Xóa</button>
+                                    <a class="btn btn-danger" href="{{route('cart.delete', ['id' => $item->id])}}">
+                                        Xóa
                                     </a>
                                 </td>
                             </tr>

@@ -78,8 +78,8 @@ Route::post('/sanpham/regishosting', 'CartController@postThem');
 Route::get('/sanpham/giohang{id}', 'RegisHostingController@getSua');
 Route::post('/sanpham/giohang{id}', 'RegisHostingController@postSua');
 
-Route::get('/sanpham/giohang/{id}', 'RegisHostingController@getXoa');
-Route::post('/sanpham/giohang/{id}', 'RegisHostingController@postXoa');
+Route::get('/sanpham/giohang{id}', 'RegisHostingController@getXoa')->name('delete-donhang');
+Route::post('/sanpham/giohang{id}', 'RegisHostingController@postXoa');
 
 // welcome
 Route::get('/', function () {

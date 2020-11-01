@@ -4,7 +4,7 @@
 	}
 
 	main{
-		min-height:260px;
+		min-height:560px;
 	}
 
 	.all-center{

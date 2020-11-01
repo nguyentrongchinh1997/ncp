@@ -33,8 +33,8 @@
 
                                 </td>
                                 <td>
-                                    <a  href="<?php echo e(route('cart.delete', ['id' => $item->id])); ?>">
-                                        <button class="btn btn-danger">Xóa</button>
+                                    <a class="btn btn-danger" href="<?php echo e(route('cart.delete', ['id' => $item->id])); ?>">
+                                        Xóa
                                     </a>
                                 </td>
                             </tr>

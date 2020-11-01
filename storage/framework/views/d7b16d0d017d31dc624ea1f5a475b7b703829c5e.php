@@ -118,10 +118,29 @@
 								<?php endif; ?>
 							</td>
 							<td class="text-center">
-								<form action="" method="post">
+								<a href="#" class="btn btn-success" data-toggle="modal" data-target="#exampleModal" ><i class="fas fa-file-import"></i>Xóa đơn hàng</a>
+
+								<form action="<?php echo e(route('delete-donhang', ['id' => $value->id])); ?>" method="post">
 								<?php echo csrf_field(); ?>
-								<button type="submit" class="btn btn-danger"><i class="fal fa-save"></i> Xác nhận xóa</button>
+									<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+								  <div class="modal-dialog">
+									<div class="modal-content">
+									  <div class="modal-header">
+										<h5 class="modal-title" id="exampleModalLabel">Bạn có muốn xóa đơn hàng của <?php echo e($value->nguoidung->name); ?> không?</h5>
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+										  <span aria-hidden="true">&times;</span>
+										</button>
+									  </div>
+									  
+									  <div class="modal-footer">
+										<button type="button" class="btn btn-secondary" data-dismiss="modal">Hùy bỏ</button>
+										<button type="submit" class="btn btn-primary">Xóa</button>
+									  </div>
+									</div>
+								  </div>
+								</div>
 							</form>
+							
 							</a>
 							</td>
 						</tr>
