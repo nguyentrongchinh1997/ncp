@@ -28,6 +28,9 @@ Route::group(['prefix' => 'cart', 'as' => 'cart.'], function(){
     Route::post('send', 'CartController@send')->name('send');
 });
 
+//xóa đơn hàng
+
+//
 Route::get('buy/domain', 'RegisHostingController@buyDomainForm')->name('buy-domain-form');
 Route::post('buy/domain', 'RegisHostingController@buyDomain')->name('buy-domain');
 
@@ -75,8 +78,8 @@ Route::post('/sanpham/regishosting', 'CartController@postThem');
 Route::get('/sanpham/giohang{id}', 'RegisHostingController@getSua');
 Route::post('/sanpham/giohang{id}', 'RegisHostingController@postSua');
 
-Route::get('/sanpham/giohang{id}', 'RegisHostingController@getXoa');
-Route::post('/sanpham/giohang{id}', 'RegisHostingController@postXoa');
+Route::get('/sanpham/giohang/{id}', 'RegisHostingController@getXoa');
+Route::post('/sanpham/giohang/{id}', 'RegisHostingController@postXoa');
 
 // welcome
 Route::get('/', function () {

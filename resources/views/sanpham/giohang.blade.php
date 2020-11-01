@@ -17,6 +17,7 @@
 						<th>Sản phẩm</th>
 						<th>Trạng thái</th>
 						<th>Xác nhận</th>
+						<th>Xóa đơn</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -109,6 +110,13 @@
 									Duyệt đơn
 								</a>
 								@endif
+							</td>
+							<td class="text-center">
+								<form action="" method="post">
+								@csrf
+								<button type="submit" class="btn btn-danger"><i class="fal fa-save"></i> Xác nhận xóa</button>
+							</form>
+							</a>
 							</td>
 						</tr>
 					@endforeach

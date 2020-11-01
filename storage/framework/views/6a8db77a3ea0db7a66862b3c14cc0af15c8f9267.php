@@ -194,7 +194,7 @@
 </style>
 <div class="container bg-img">
     <div class="row">
-        <div class="col-md-3 col-sm-6">
+        <div class="col-md-3 col-sm-6" onclick="window.open('<?php echo e(route('sanphamdomain')); ?>','mywindow');">
             <div class="box">
                 <img class="rounded" src="<?php echo e(asset('/images/domain.jpg')); ?>" alt="domain">
                 <div class="box-content">
@@ -203,16 +203,16 @@
                 </div>   
             </div>             
         </div>
-        <div class="col-md-3 col-sm-6">
+        <div class="col-md-3 col-sm-6" onclick="window.open('<?php echo e(route('sanphamhosting')); ?>','mywindow');">
             <div class="box">
                 <img class="rounded" src="<?php echo e(asset('/images/host.jpg')); ?>" alt="giay phut">
-                <div class="box-content">  
+                <div class="box-content links">  
                     <h3 class="title">Hosting</h3>
                     <span class="post">Hosting giá rẻ</span>
                 </div>
             </div>             
         </div>
-        <div class="col-md-3 col-sm-6">
+        <div class="col-md-3 col-sm-6" onclick="window.open('<?php echo e(route('contact')); ?>','mywindow');">
             <div class="box">
                 <img class="rounded" src="<?php echo e(asset('/images/contact.jpg')); ?>" alt="contacts">
                 <div class="box-content">
@@ -221,7 +221,7 @@
                 </div>   
             </div>             
         </div>
-        <div class="col-md-3 col-sm-6">
+        <div class="col-md-3 col-sm-6" onclick="window.open('<?php echo e(route('baiviet')); ?>','mywindow');">
             <div class="box">
                 <img class="rounded" src="<?php echo e(asset('/images/posts.png')); ?>" alt="bài viết">
                 <div class="box-content">

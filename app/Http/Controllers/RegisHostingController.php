@@ -153,4 +153,22 @@ class RegisHostingController extends Controller
 
 		return view('sanpham/regishosting', compact('option'));
 	}
+
+	
+	// Xác nhận xóa
+	public function getXoa($id)
+	{
+		$orders = Order::find($id);
+		return view('orders.xoa', compact('orders'));
+	}
+	
+	// Xử lý xóa
+	public function postXoa(Request $request, $id)
+	{
+		$orders = Domain::find($id);
+		$orders->delete();
+		
+		return redirect('/orders');
+	}
+
 }

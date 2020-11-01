@@ -18,6 +18,7 @@
 						<th>Sản phẩm</th>
 						<th>Trạng thái</th>
 						<th>Xác nhận</th>
+						<th>Xóa đơn</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -115,6 +116,13 @@
 									Duyệt đơn
 								</a>
 								<?php endif; ?>
+							</td>
+							<td class="text-center">
+								<form action="" method="post">
+								<?php echo csrf_field(); ?>
+								<button type="submit" class="btn btn-danger"><i class="fal fa-save"></i> Xác nhận xóa</button>
+							</form>
+							</a>
 							</td>
 						</tr>
 					<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
